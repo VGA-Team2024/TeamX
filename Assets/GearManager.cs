@@ -7,9 +7,8 @@ public class GearManager : MonoBehaviour
     public static GearManager Instance;
 
     [SerializeField] float _decimalScore = 0;
-    ScoreManager _sm;
     [SerializeField] List<GearInfo> _gears = new List<GearInfo>();
-    public List<GearInfo> Gears { get { return _gears; } }
+    public List<GearInfo> Gears { get { return _gears; } set { _gears = value; } }
 
     private void Awake()
     {
@@ -23,7 +22,6 @@ public class GearManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sm = GameObject.FindFirstObjectByType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -36,7 +34,7 @@ public class GearManager : MonoBehaviour
 
         if(_decimalScore > 1)
         {
-            _sm.AddScore((int)_decimalScore);
+            ScoreManager.Instance.AddScore((int)_decimalScore);
             _decimalScore -= (int)_decimalScore;
         }//スコアは整数型なので１以上の数字が完成したらスコアマネージャーの数字を増やす
     }

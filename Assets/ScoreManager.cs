@@ -3,8 +3,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-
-    [SerializeField] long _score = 0;
+    [SerializeField,Tooltip("インスペクターで見る用 触らないで")] long _score = 0;
     public long Score { get { return _score; } }
     private void Awake()
     {
