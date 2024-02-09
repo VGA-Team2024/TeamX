@@ -29,11 +29,7 @@ public class GearManager : MonoBehaviour
     {
         foreach (GearInfo gear in _gears)
         {
-            if(GameManager.Instance.UpCursor && gear.GearSps == 0.1f)
-            {
-                _decimalScore += gear.GearSps * gear.GearValue * Time.deltaTime;
-            }//カーソルのアップグレードがあった時に二回スコアに加算する用。他のアップグレードが増えたら書き換える
-            _decimalScore += gear.GearSps * gear.GearValue * Time.deltaTime;
+            _decimalScore += gear.GearSps * gear.GearValue * gear.GearMulti * Time.deltaTime;
         }
 
         if(_decimalScore > 1)
@@ -69,4 +65,5 @@ public class GearInfo
     public string GearName;
     public float GearSps;
     public int GearValue;
+    public float GearMulti = 1;
 }//ギアのスコア加算に必要な情報だけを持つクラス

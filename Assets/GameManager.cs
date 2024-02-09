@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Text _scoreText;
     [SerializeField] List<Text> _gearListText = new List<Text>();
-    bool _upCursor = false;
-    public bool UpCursor {  get { return _upCursor; } }
+    float _clickMulti = 1;
+    public float ClickMulti { get { return _clickMulti; } }
     private void Awake()
     {
         if (Instance == null)
@@ -44,8 +45,21 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void UpGrade()
+    public void UpGrade(string name)
     {
-        _upCursor = true;
+        if(name == "クリック")
+        {
+            _clickMulti *= 2;
+        }
+        else
+        {
+            foreach(GearInfo gear in GearManager.Instance.Gears)
+            {
+                if(gear.GearName == name)
+                {
+                    gear.GearMulti *= 2;
+                }
+            }
+        }
     }
 }
