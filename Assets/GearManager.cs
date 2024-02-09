@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,8 @@ public class GearManager : MonoBehaviour
     public static GearManager Instance;
 
     [SerializeField] float _decimalScore = 0;
-    ScoreManager _sm;
     [SerializeField] List<GearInfo> _gears = new List<GearInfo>();
-    public List<GearInfo> Gears { get { return _gears; } }
+    public List<GearInfo> Gears { get { return _gears; } set { _gears = value; } }
 
     private void Awake()
     {
@@ -17,13 +16,12 @@ public class GearManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this.gameObject);
-    }//ƒVƒ“ƒOƒ‹ƒgƒ“‰»
+    }//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³åŒ–
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _sm = GameObject.FindFirstObjectByType<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -31,14 +29,22 @@ public class GearManager : MonoBehaviour
     {
         foreach (GearInfo gear in _gears)
         {
-            _decimalScore += gear.GearSps * gear.GearValue * Time.deltaTime;
+            _decimalScore += gear.GearSps * gear.GearValue * gear.GearMulti * Time.deltaTime;
         }
 
         if(_decimalScore > 1)
         {
-            _sm.AddScore((int)_decimalScore);
+            ScoreManager.Instance.AddScore((int)_decimalScore);
             _decimalScore -= (int)_decimalScore;
-        }//ƒXƒRƒA‚Í®”Œ^‚È‚Ì‚Å‚PˆÈã‚Ì”š‚ªŠ®¬‚µ‚½‚çƒXƒRƒAƒ}ƒl[ƒWƒƒ[‚Ì”š‚ğ‘‚â‚·
+        }//ã‚¹ã‚³ã‚¢ã¯æ•´æ•°å‹ãªã®ã§ï¼‘ä»¥ä¸Šã®æ•°å­—ãŒå®Œæˆã—ãŸã‚‰ã‚¹ã‚³ã‚¢ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®æ•°å­—ã‚’å¢—ã‚„ã™
+    }
+
+    public void GearsSort()
+    {
+        if (_gears.Count > 1)
+        {
+            _gears.Sort((A, B) => A.GearSps.CompareTo(B.GearSps));
+        }
     }
 
     public void AddGear(string name)
@@ -48,6 +54,7 @@ public class GearManager : MonoBehaviour
             if(gear.GearName == name)
             {
                 gear.GearValue += 1;
+                GameManager.Instance.GearsListTextUpdate();
             }
         }
     }
@@ -58,4 +65,5 @@ public class GearInfo
     public string GearName;
     public float GearSps;
     public int GearValue;
-}//ƒMƒA‚ÌƒXƒRƒA‰ÁZ‚É•K—v‚Èî•ñ‚¾‚¯‚ğ‚ÂƒNƒ‰ƒX
+    public float GearMulti = 1;
+}//ã‚®ã‚¢ã®ã‚¹ã‚³ã‚¢åŠ ç®—ã«å¿…è¦ãªæƒ…å ±ã ã‘ã‚’æŒã¤ã‚¯ãƒ©ã‚¹

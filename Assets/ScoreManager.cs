@@ -1,10 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-
-    [SerializeField] long _score = 0;
+    [SerializeField,Tooltip("インスペクターで見る用 触らないで")] long _score = 0;
     public long Score { get { return _score; } }
     private void Awake()
     {
@@ -12,14 +11,16 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this.gameObject);
-    }//�V���O���g����
+    }//シングルトン化
 
     public void AddScore(int add)
     {
         _score += add;
+        GameManager.Instance.ScoreUpdate();
     }
     public void SubScore(int sub)
     {
         _score -= sub;
+        GameManager.Instance.ScoreUpdate();
     }
 }
