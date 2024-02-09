@@ -8,6 +8,6 @@ public class Pocket
 
     public void Clicked()
     {
-        ScoreManager.Instance.AddScore(_clickedAddScore);
+        ScoreManager.Instance.AddScore((int)(_clickedAddScore * GameManager.Instance.ClickMulti));
     }
 }
