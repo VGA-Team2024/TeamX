@@ -29,6 +29,10 @@ public class GearManager : MonoBehaviour
     {
         foreach (GearInfo gear in _gears)
         {
+            if(GameManager.Instance.UpCursor && gear.GearSps == 0.1f)
+            {
+                _decimalScore += gear.GearSps * gear.GearValue * Time.deltaTime;
+            }//カーソルのアップグレードがあった時に二回スコアに加算する用。他のアップグレードが増えたら書き換える
             _decimalScore += gear.GearSps * gear.GearValue * Time.deltaTime;
         }
 
@@ -39,6 +43,14 @@ public class GearManager : MonoBehaviour
         }//スコアは整数型なので１以上の数字が完成したらスコアマネージャーの数字を増やす
     }
 
+    public void GearsSort()
+    {
+        if (_gears.Count > 1)
+        {
+            _gears.Sort((A, B) => A.GearSps.CompareTo(B.GearSps));
+        }
+    }
+
     public void AddGear(string name)
     {
         foreach(GearInfo gear in _gears)
@@ -46,6 +58,7 @@ public class GearManager : MonoBehaviour
             if(gear.GearName == name)
             {
                 gear.GearValue += 1;
+                GameManager.Instance.GearsListTextUpdate();
             }
         }
     }

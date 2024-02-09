@@ -16,9 +16,11 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int add)
     {
         _score += add;
+        GameManager.Instance.ScoreUpdate();
     }
     public void SubScore(int sub)
     {
         _score -= sub;
+        GameManager.Instance.ScoreUpdate();
     }
 }
