@@ -1,21 +1,44 @@
-using System;
+ï»¿using System;
 using UnityEngine;
+using UnityEngine.UI;
 public abstract class ItemBase : MonoBehaviour
 {
+    Text _text;
+    void Start()
+    {
+        _text = GetComponentInChildren<Text>();
+        _text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}" ;
+        GearInfo gearInfo = new();
+        gearInfo.GearName = itemStruct.ItemName;
+        gearInfo.GearSps = itemStruct.ItemSps;
+        gearInfo.GearValue = 0;
+        GearManager.Instance.Gears.Add(gearInfo);
+    }
     const double _buyMag = 1.15;
     [Serializable]
     public struct ItemStruct
     {
-        /// <summary>ƒAƒCƒeƒ€‚Ì–¼‘OB—áFƒOƒ‰ƒ“ƒ} </summary>
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®åå‰ã€‚ä¾‹ï¼šã‚°ãƒ©ãƒ³ãƒ </summary>
         public string ItemName;
-        /// <summary>ƒAƒCƒeƒ€‚ÌÅ‰‚Ì’l’iB—áF100</summary>
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®å€¤æ®µã€‚ä¾‹ï¼š100</summary>
         public double ItemPrice;
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®spsã€‚ä¾‹ï¼š1</summary>
+        public float ItemSps;
     }
 
-    [SerializeField]protected ItemStruct itemStruct = new();
+    [SerializeField] protected ItemStruct itemStruct = new();
     public void MulIntemBuyMag() => itemStruct.ItemPrice *= _buyMag;
+
+    public bool IsBuy() => ScoreManager.Instance.Score > (int)itemStruct.ItemPrice;
+    
     public virtual void BoughItem()
     {
-        MulIntemBuyMag();
+        if (IsBuy())
+        {
+            ScoreManager.Instance.SubScore((int)itemStruct.ItemPrice);
+            MulIntemBuyMag();
+            GearManager.Instance.AddGear(itemStruct.ItemName);
+            _text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}";
+        }
     }
 }
