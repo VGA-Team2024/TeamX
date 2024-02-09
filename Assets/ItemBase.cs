@@ -1,13 +1,17 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+/// <summary>
+/// Gear固有のメソッドを追加したいときはBoughItem()というメソッドをoverrideしてください。
+/// ※このスクリプトは継承が必須です
+/// </summary>
 public abstract class ItemBase : MonoBehaviour
 {
-    Text _text;
+    TMP_Text _tmp_Text;
     void Start()
     {
-        _text = GetComponentInChildren<Text>();
-        _text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}" ;
+        _tmp_Text = GetComponentInChildren<TMP_Text>();
+        _tmp_Text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}" ;
         GearInfo gearInfo = new()
         {
             GearName = itemStruct.ItemName,
@@ -21,11 +25,11 @@ public abstract class ItemBase : MonoBehaviour
     [Serializable]
     public struct ItemStruct
     {
-        /// <summary>アイテムの名前。例：グランマ </summary>
+        [Tooltip("アイテムの名前。例：グランマ")]/// <summary>アイテムの名前。例：グランマ </summary>
         public string ItemName;
-        /// <summary>アイテムの値段。例：100</summary>
+        [Tooltip("アイテムの値段。例：100")]/// <summary>アイテムの値段。例：100</summary>
         public double ItemPrice;
-        /// <summary>アイテムのsps。例：1</summary>
+        [Tooltip("アイテムのsps。例：1")]/// <summary>アイテムのsps。例：1</summary>
         public float ItemSps;
     }
 
@@ -41,7 +45,7 @@ public abstract class ItemBase : MonoBehaviour
             ScoreManager.Instance.SubScore((int)itemStruct.ItemPrice);
             MulIntemBuyMag();
             GearManager.Instance.AddGear(itemStruct.ItemName);
-            _text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}";
+            _tmp_Text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}";
         }
     }
 }
