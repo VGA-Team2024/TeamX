@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.UI;
 public abstract class ItemBase : MonoBehaviour
@@ -18,11 +18,11 @@ public abstract class ItemBase : MonoBehaviour
     [Serializable]
     public struct ItemStruct
     {
-        /// <summary>ƒAƒCƒeƒ€‚Ì–¼‘OB—áFƒOƒ‰ƒ“ƒ} </summary>
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®åå‰ã€‚ä¾‹ï¼šã‚°ãƒ©ãƒ³ãƒ </summary>
         public string ItemName;
-        /// <summary>ƒAƒCƒeƒ€‚Ì’l’iB—áF100</summary>
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®å€¤æ®µã€‚ä¾‹ï¼š100</summary>
         public double ItemPrice;
-        /// <summary>ƒAƒCƒeƒ€‚ÌspsB—áF1</summary>
+        /// <summary>ã‚¢ã‚¤ãƒ†ãƒ ã®spsã€‚ä¾‹ï¼š1</summary>
         public float ItemSps;
     }
 
