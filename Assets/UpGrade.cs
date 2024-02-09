@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UpGrade : MonoBehaviour
 {
     [SerializeField] int _price;
-    [SerializeField] string[] _upGradeGears;
+    [SerializeField,Tooltip("強化するギアの名前、複数可")] string[] _upGradeGears;
     [SerializeField] string _UpGradeNameText;
 
     private void Start()
