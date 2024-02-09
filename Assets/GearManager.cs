@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class GearManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this.gameObject);
-    }//ƒVƒ“ƒOƒ‹ƒgƒ“‰»
+    }//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³åŒ–
 
 
     // Start is called before the first frame update
@@ -36,7 +36,7 @@ public class GearManager : MonoBehaviour
         {
             ScoreManager.Instance.AddScore((int)_decimalScore);
             _decimalScore -= (int)_decimalScore;
-        }//ƒXƒRƒA‚Í®”Œ^‚È‚Ì‚Å‚PˆÈã‚Ì”š‚ªŠ®¬‚µ‚½‚çƒXƒRƒAƒ}ƒl[ƒWƒƒ[‚Ì”š‚ğ‘‚â‚·
+        }//ã‚¹ã‚³ã‚¢ã¯æ•´æ•°å‹ãªã®ã§ï¼‘ä»¥ä¸Šã®æ•°å­—ãŒå®Œæˆã—ãŸã‚‰ã‚¹ã‚³ã‚¢ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®æ•°å­—ã‚’å¢—ã‚„ã™
     }
 
     public void AddGear(string name)
@@ -56,4 +56,4 @@ public class GearInfo
     public string GearName;
     public float GearSps;
     public int GearValue;
-}//ƒMƒA‚ÌƒXƒRƒA‰ÁZ‚É•K—v‚Èî•ñ‚¾‚¯‚ğ‚ÂƒNƒ‰ƒX
+}//ã‚®ã‚¢ã®ã‚¹ã‚³ã‚¢åŠ ç®—ã«å¿…è¦ãªæƒ…å ±ã ã‘ã‚’æŒã¤ã‚¯ãƒ©ã‚¹

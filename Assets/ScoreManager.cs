@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-    [SerializeField,Tooltip("ƒCƒ“ƒXƒyƒNƒ^[‚ÅŒ©‚é—p G‚ç‚È‚¢‚Å")] long _score = 0;
+    [SerializeField,Tooltip("ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã§è¦‹ã‚‹ç”¨ è§¦ã‚‰ãªã„ã§")] long _score = 0;
     public long Score { get { return _score; } }
     private void Awake()
     {
@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this.gameObject);
-    }//ƒVƒ“ƒOƒ‹ƒgƒ“‰»
+    }//ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³åŒ–
 
     public void AddScore(int add)
     {
