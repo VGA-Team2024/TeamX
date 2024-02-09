@@ -8,11 +8,14 @@ public abstract class ItemBase : MonoBehaviour
     {
         _text = GetComponentInChildren<Text>();
         _text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}" ;
-        GearInfo gearInfo = new();
-        gearInfo.GearName = itemStruct.ItemName;
-        gearInfo.GearSps = itemStruct.ItemSps;
-        gearInfo.GearValue = 0;
+        GearInfo gearInfo = new()
+        {
+            GearName = itemStruct.ItemName,
+            GearSps = itemStruct.ItemSps,
+            GearValue = 0
+        };
         GearManager.Instance.Gears.Add(gearInfo);
+        GearManager.Instance.GearsSort();
     }
     const double _buyMag = 1.15;
     [Serializable]
