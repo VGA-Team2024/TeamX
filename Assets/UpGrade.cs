@@ -23,9 +23,8 @@ public abstract class UpGrade : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    protected virtual void OverRideBough()
-    {
-        //機能増やしたかったらここに書いてね
-    }
+    /// <summary>
+    /// お金が減った時にしてほしい機能を書く
+    /// </summary>
+    protected abstract void OverRideBough();
 }
