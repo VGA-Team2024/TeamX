@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pocket 
+public class Pocket : MonoBehaviour
 {
     [SerializeField] int _clickedAddScore = 1;
 
