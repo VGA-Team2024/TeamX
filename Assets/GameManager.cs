@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [SerializeField] Text _scoreText;
-    [SerializeField] List<Text> _gearListText = new List<Text>();
+    [SerializeField] TMP_Text _scoreText;
+    [SerializeField] List<TMP_Text> _gearListText = new List<TMP_Text>();
     float _clickMulti = 1;
     public float ClickMulti { get { return _clickMulti; } }
     private void Awake()
@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ScoreUpdate();
+        GearsListTextUpdate();
     }
 
     // Update is called once per frame

@@ -44,6 +44,7 @@ public class GearManager : MonoBehaviour
         if (_gears.Count > 1)
         {
             _gears.Sort((A, B) => A.GearSps.CompareTo(B.GearSps));
+            GameManager.Instance.GearsListTextUpdate();
         }
     }
 
