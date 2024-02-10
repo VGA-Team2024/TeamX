@@ -35,9 +35,7 @@ public abstract class ItemBase : MonoBehaviour
 
     [SerializeField] protected ItemStruct itemStruct = new();
     public void MulIntemBuyMag() => itemStruct.ItemPrice *= _buyMag;
-
-    public bool IsBuy() => ScoreManager.Instance.Score > (int)itemStruct.ItemPrice;
-    
+    public bool IsBuy() => ScoreManager.Instance.Score >= (int)itemStruct.ItemPrice;
     public virtual void BoughItem()
     {
         if (IsBuy())
