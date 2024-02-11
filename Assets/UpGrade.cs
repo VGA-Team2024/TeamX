@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpGrade : MonoBehaviour
+public abstract class UpGrade : MonoBehaviour
 {
     [SerializeField] int _price;
-    [SerializeField,Tooltip("強化するギアの名前、複数可")] string[] _upGradeGears;
     [SerializeField] string _UpGradeNameText;
 
     private void Start()
@@ -17,20 +16,15 @@ public class UpGrade : MonoBehaviour
 
     public void BoughUpGrade()
     {
-        if(ScoreManager.Instance.Score > _price)
+        if(ScoreManager.Instance.Score >= _price)
         {
             ScoreManager.Instance.SubScore(_price);
-            foreach(string s in _upGradeGears)
-            {
-                GameManager.Instance.UpGrade(s);
-            }
             OverRideBough();
             Destroy(gameObject);
         }
     }
-
-    protected virtual void OverRideBough()
-    {
-
-    }
+    /// <summary>
+    /// お金が減った時にしてほしい機能を書く
+    /// </summary>
+    protected abstract void OverRideBough();
 }

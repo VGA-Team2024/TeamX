@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void UpGrade(string name)
+    public void UpGrade(string name, float multi)
     {
         if(name == "クリック")
         {
-            _clickMulti *= 2;
+            _clickMulti *= multi;
         }
         else
         {
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             {
                 if(gear.GearName == name)
                 {
-                    gear.GearMulti *= 2;
+                    gear.GearMulti *= multi;
                 }
             }
         }
