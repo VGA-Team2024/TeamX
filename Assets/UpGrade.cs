@@ -11,7 +11,7 @@ public abstract class UpGrade : MonoBehaviour
 
     private void Start()
     {
-        GetComponentInChildren<TMP_Text>().text = $"{_UpGradeNameText} {_price}";
+        GetComponentInChildren<TMP_Text>().text = $"{_UpGradeNameText} {_price}G";
     }
 
     public void BoughUpGrade()
