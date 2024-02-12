@@ -18,12 +18,12 @@ public class Pocket : MonoBehaviour
 
     public void OnMouseDown()
     {
-        _material.SetColor("_EmissionColor", Color.white * 0f);
+        _material.SetColor("_EmissionColor", new Color(0.9137255f, 0.9137255f, 0.9137255f, 1f) * 0.8f);
     }
 
     public void OnMouseUp()
     {
-        _material.SetColor("_EmissionColor", Color.white);
+        _material.SetColor("_EmissionColor", new Color(0.9137255f, 0.9137255f, 0.9137255f, 1f) * 1f);
     }
 
 }
