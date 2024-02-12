@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void ScoreUpdate()
     {
-        _scoreText.text = ScoreManager.Instance.Score.ToString("N0");
+        _scoreText.text = ScoreManager.Instance.Score.ToString("N0") + "G";
     }//ゲーム画面のScoreを更新する
 
     public void GearsListTextUpdate()
