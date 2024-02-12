@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ScoreUpdate();
-        GearsListTextUpdate();
     }
 
     // Update is called once per frame
