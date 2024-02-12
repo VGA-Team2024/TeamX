@@ -11,7 +11,7 @@ public abstract class ItemBase : MonoBehaviour
     void Start()
     {
         _tmp_Text = GetComponentInChildren<TMP_Text>();
-        _tmp_Text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}G" ;
+        _tmp_Text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}G";
         GearInfo gearInfo = new()
         {
             GearName = itemStruct.ItemName,
@@ -21,21 +21,21 @@ public abstract class ItemBase : MonoBehaviour
         GearManager.Instance.Gears.Add(gearInfo);
         GearManager.Instance.GearsSort();
     }
-    const float _buyMag = 1.15f;
+    const double _buyMag = 1.15;
     [Serializable]
     public struct ItemStruct
     {
         [Tooltip("アイテムの名前。例：グランマ")]/// <summary>アイテムの名前。例：グランマ </summary>
         public string ItemName;
         [Tooltip("アイテムの値段。例：100")]/// <summary>アイテムの値段。例：100</summary>
-        public float ItemPrice;
+        public double ItemPrice;
         [Tooltip("アイテムのsps。例：1")]/// <summary>アイテムのsps。例：1</summary>
         public float ItemSps;
     }
 
     [SerializeField] protected ItemStruct itemStruct = new();
     public void MulIntemBuyMag() => itemStruct.ItemPrice *= _buyMag;
-    public bool IsBuy() => ScoreManager.Instance.Score >= (int)itemStruct.ItemPrice;
+    public bool IsBuy() => ScoreManager.Instance.Score >= Math.Ceiling(itemStruct.ItemPrice);
     public virtual void BoughItem()
     {
         if (IsBuy())
@@ -43,7 +43,7 @@ public abstract class ItemBase : MonoBehaviour
             ScoreManager.Instance.SubScore((int)itemStruct.ItemPrice);
             MulIntemBuyMag();
             GearManager.Instance.AddGear(itemStruct.ItemName);
-            _tmp_Text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}G";
+            _tmp_Text.text = $"{itemStruct.ItemName} {Math.Ceiling(itemStruct.ItemPrice)}G";
         }
     }
 }
