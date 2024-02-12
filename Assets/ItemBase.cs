@@ -11,7 +11,7 @@ public abstract class ItemBase : MonoBehaviour
     void Start()
     {
         _tmp_Text = GetComponentInChildren<TMP_Text>();
-        _tmp_Text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}" ;
+        _tmp_Text.text =  $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}G" ;
         GearInfo gearInfo = new()
         {
             GearName = itemStruct.ItemName,
@@ -43,7 +43,7 @@ public abstract class ItemBase : MonoBehaviour
             ScoreManager.Instance.SubScore((int)itemStruct.ItemPrice);
             MulIntemBuyMag();
             GearManager.Instance.AddGear(itemStruct.ItemName);
-            _tmp_Text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}";
+            _tmp_Text.text = $"{itemStruct.ItemName} {(int)itemStruct.ItemPrice}G";
         }
     }
 }
