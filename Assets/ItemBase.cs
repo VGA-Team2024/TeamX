@@ -21,14 +21,14 @@ public abstract class ItemBase : MonoBehaviour
         GearManager.Instance.Gears.Add(gearInfo);
         GearManager.Instance.GearsSort();
     }
-    const double _buyMag = 1.15;
+    const float _buyMag = 1.15f;
     [Serializable]
     public struct ItemStruct
     {
         [Tooltip("アイテムの名前。例：グランマ")]/// <summary>アイテムの名前。例：グランマ </summary>
         public string ItemName;
         [Tooltip("アイテムの値段。例：100")]/// <summary>アイテムの値段。例：100</summary>
-        public double ItemPrice;
+        public float ItemPrice;
         [Tooltip("アイテムのsps。例：1")]/// <summary>アイテムのsps。例：1</summary>
         public float ItemSps;
     }
