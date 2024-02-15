@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7731586953238393969}
   - component: {fileID: 977238969015722997}
   m_Layer: 0
-  m_Name: Mycube
+  m_Name: PrefubGurid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
