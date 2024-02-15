@@ -15,10 +15,11 @@ public class FildGanareter : MonoBehaviour
         {
             for (int z = 1; z <= _fildRangez; z++)
             {
-                Instantiate(_gameObjectPrefubFild,new Vector3(x*_fildToFildRenge, 0 , z*_fildToFildRenge),Quaternion.identity);
+                var newGurid =Instantiate(_gameObjectPrefubFild,new Vector3(x*_fildToFildRenge, 0 , z*_fildToFildRenge),Quaternion.identity);
+                newGurid.GetComponent<Gurid>().x = x;
+                newGurid.GetComponent<Gurid>().Y = z;
             }
         }
-        
     }
 
 }
