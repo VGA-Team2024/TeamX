@@ -122,4 +122,4 @@ MonoBehaviour:
   _z: 0
   _meshRenderer: {fileID: 3795996340273702966}
   _material: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  _material2: {fileID: -1562840327229668697, guid: 2f389a015655cec46939bcba4dc1f038, type: 2}
+  _material2: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
