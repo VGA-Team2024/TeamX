@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class UISGame : MonoBehaviour
 {
-
-
-    void BildingBotton()
+    public void BildingBotton()
     {
         SMangerData.Instance.EGameMode = EnumGameMode.Bliding;
     }
-    
 }

@@ -6,9 +6,14 @@ using UnityEngine.Serialization;
 
 public class SMangerData : Singleton<SMangerData>
 {
-    [Header("Game")] [SerializeField] private List<BuldingStruct> _buildingStructs = new List<BuldingStruct>();
-    [SerializeField] private int _lastx, _lastz;
+    [Header("Game")] [SerializeField] private List<BuildingStruct> _buildingStructs = new List<BuildingStruct>();
+    [SerializeField] private Gurid _lastgurid ;
     [SerializeField] private EnumGameMode _eGameMode = EnumGameMode.Normal;
+    [SerializeField] private BuildingStruct _selectBuildingStruct;
+
+
+
+    private List<Gurid> _gurids = new List<Gurid>();
 
 
     [Header("Field")] [SerializeField] private float _fieldBildHight;
@@ -16,9 +21,44 @@ public class SMangerData : Singleton<SMangerData>
     [SerializeField] private GameObject _fieldgameObjectPrefubFild;
 
     [Header("Selector")] [SerializeField] private GameObject _OBJSelectorView;
+    [SerializeField] private GameObject _OBJSelectorViewDefult;
 
+
+    [SerializeField] private Material _SelectorMaterial;
     public event Action OnOBJSelectorViewChanged;
 
+     public BuildingStruct SelectBuildingStruct
+     {
+         get => _selectBuildingStruct;
+         set => _selectBuildingStruct = value;
+     }
+    public Gurid Lastgurid
+    {
+        get => _lastgurid;
+        set => _lastgurid = value;
+    }
+
+    public List<Gurid> Gurids
+    {
+        get => _gurids;
+        set => _gurids = value;
+    }
+
+    public GameObject ObjSelectorViewDefult
+    {
+        get => _OBJSelectorViewDefult;
+    }
+
+    public void ListGuridAdd(Gurid value)
+    {
+        _gurids.Add(value);
+    }
+
+    public Material SelectorMaterial
+    {
+        get => _SelectorMaterial;
+        set => _SelectorMaterial = value;
+    }
 
     public GameObject ObjSelectorView
     {
@@ -30,29 +70,23 @@ public class SMangerData : Singleton<SMangerData>
         }
     }
 
-
-    public List<BuldingStruct> BuildingStructs
+    public List<BuildingStruct> BuildingStructs
     {
         get => _buildingStructs;
         set => _buildingStructs = value;
     }
 
-    public int Lastx
-    {
-        get => _lastx;
-        set => _lastx = value;
-    }
-
-    public int Lastz
-    {
-        get => _lastz;
-        set => _lastz = value;
-    }
-
     public EnumGameMode EGameMode
     {
         get => _eGameMode;
-        set => _eGameMode = value;
+        set
+        {
+            _eGameMode = value;
+            if (_eGameMode == EnumGameMode.Normal)
+            {
+                ObjSelectorView = _OBJSelectorViewDefult;
+            }
+        }
     }
 
 
@@ -103,7 +137,7 @@ public class SMangerData : Singleton<SMangerData>
 
 
 [Serializable]
-public struct BuldingStruct
+public struct BuildingStruct
 {
     [SerializeField] private GameObject _gameObjectBilding;
     [SerializeField] private Texture _texture;

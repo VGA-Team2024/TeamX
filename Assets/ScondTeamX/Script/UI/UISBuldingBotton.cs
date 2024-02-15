@@ -29,6 +29,7 @@ public class UISBuldingBotton : MonoBehaviour
 
     public void OnbottonClick()
     {
+        SMangerData.Instance.SelectBuildingStruct = SMangerData.Instance.BuildingStructs[_structNum];
         SMangerData.Instance.ObjSelectorView = SMangerData.Instance.BuildingStructs[_structNum].GameObjectBilding;
     }
 }

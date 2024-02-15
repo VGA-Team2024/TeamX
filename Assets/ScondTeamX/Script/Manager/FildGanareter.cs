@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class FildGanareter : MonoBehaviour
 {
-
-    private List<Gurid> _gurids = new List<Gurid>();
-
+    private SMangerData _smd;
 
     void Start()
     {
+        _smd = SMangerData.Instance;
         GuridGararete();
     }
 
     public void GuridGararete()
     {
-        for (int x = 1; x <= SMangerData.Instance.FieldRangex; x++)
+        for (int x = 1; x <= _smd.FieldRangex; x++)
         {
-            for (int z = 1; z <= SMangerData.Instance.FieldRangex; z++)
+            for (int z = 1; z <= _smd.FieldRangex; z++)
             {
-                var newGurid = Instantiate(SMangerData.Instance.FieldgameObjectPrefubFild,
-                    new Vector3(x * SMangerData.Instance.FieldToFieldRenge, 0, z * SMangerData.Instance.FieldToFieldRenge), SMangerData.Instance.Fieldquaternion);
+                var newGurid = Instantiate(_smd.FieldgameObjectPrefubFild,
+                    new Vector3(x * _smd.FieldToFieldRenge, 0,
+                        z * _smd.FieldToFieldRenge), _smd.Fieldquaternion);
                 var newGuridScript = newGurid.GetComponent<Gurid>();
-                newGuridScript.x = x;
-                newGuridScript.Y = z;
-                _gurids.Add(newGuridScript);
+                newGuridScript.X = x;
+                newGuridScript.Z = z;
+                _smd.ListGuridAdd(newGuridScript);
                 newGurid.transform.SetParent(this.transform);
             }
         }
