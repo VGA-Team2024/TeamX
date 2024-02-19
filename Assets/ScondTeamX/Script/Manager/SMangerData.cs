@@ -20,16 +20,29 @@ public class SMangerData : Singleton<SMangerData>
     [SerializeField] private int _fieldRangex, _fieldRangez;
     [SerializeField] private Quaternion _fieldquaternion;
     
+    
     [Header("BildMode")] [SerializeField] private GameObject _bildDemo;
+    public event Action OnOBJSelectorViewChanged;
+
     
-    [Header("GameData")] [SerializeField] private int _warPower;
-    [SerializeField] private int _money;
     
-    public int Money
+    
+    [Header("GameData")] [SerializeField] private int _warPower; 
+    [SerializeField] private int _gold = 10;
+    
+    public event Action OnGoldChanged;
+
+
+    public int Gold
     {
-        get => _money;
-        set => _money = value;
+        get => _gold;
+        set
+        {
+            _gold = value;
+            OnGoldChanged?.Invoke();
+        }
     }
+
     public int WarPower
     {
         get => _warPower;
@@ -41,8 +54,7 @@ public class SMangerData : Singleton<SMangerData>
         set => _bildDemo = value;
     }
     
-    public event Action OnOBJSelectorViewChanged;
-
+ 
     public BuildingStruct SelectBuildingStruct
     {
         get => _selectBuildingStruct;
