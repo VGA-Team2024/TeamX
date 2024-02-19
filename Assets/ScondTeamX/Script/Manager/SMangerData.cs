@@ -20,7 +20,6 @@ public class SMangerData : Singleton<SMangerData>
     [SerializeField] private int _fieldRangex, _fieldRangez;
     [SerializeField] private Quaternion _fieldquaternion;
     
-    
     [Header("BildMode")] [SerializeField] private GameObject _bildDemo;
     public event Action OnOBJSelectorViewChanged;
 
@@ -48,12 +47,6 @@ public class SMangerData : Singleton<SMangerData>
         get => _warPower;
         set => _warPower = value;
     }
-    public GameObject BildDemo
-    {
-        get => _bildDemo;
-        set => _bildDemo = value;
-    }
-    
  
     public BuildingStruct SelectBuildingStruct
     {
@@ -84,7 +77,7 @@ public class SMangerData : Singleton<SMangerData>
         set => _SelectorMaterial = value;
     }
 
-    public GameObject ObjSelectorView
+    public GameObject BildDemo
     {
         get => _bildDemo;
         set
@@ -108,7 +101,7 @@ public class SMangerData : Singleton<SMangerData>
             _eGameMode = value;
             if (_eGameMode == EnumGameMode.Normal)
             {
-                ObjSelectorView = null;
+                BildDemo = null;
             }
         }
     }
