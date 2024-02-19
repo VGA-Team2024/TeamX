@@ -1,25 +1,31 @@
-
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FildGanareter : MonoBehaviour
 {
-    [SerializeField] private float _fildToFildRenge = 10;
-    [SerializeField] private GameObject _gameObjectPrefubFild;
-    [SerializeField] private int _fildRangex;
-    [SerializeField] private int _fildRangez;
-
+    private SMangerData _smd;
 
     void Start()
     {
-        for (int x = 1; x <= _fildRangex; x++)
+        _smd = SMangerData.Instance;
+        GuridGararete();
+    }
+
+    public void GuridGararete()
+    {
+        for (int x = 1; x <= _smd.FieldRangex; x++)
         {
-            for (int z = 1; z <= _fildRangez; z++)
+            for (int z = 1; z <= _smd.FieldRangex; z++)
             {
-                var newGurid =Instantiate(_gameObjectPrefubFild,new Vector3(x*_fildToFildRenge, 0 , z*_fildToFildRenge),Quaternion.identity);
-                newGurid.GetComponent<Gurid>().x = x;
-                newGurid.GetComponent<Gurid>().Y = z;
+                var newGurid = Instantiate(_smd.FieldgameObjectPrefubFild,
+                    new Vector3(x * _smd.FieldToFieldRenge, 0,
+                        z * _smd.FieldToFieldRenge), _smd.Fieldquaternion);
+                var newGuridScript = newGurid.GetComponent<Gurid>();
+                newGuridScript.X = x;
+                newGuridScript.Z = z;
+                _smd.ListGuridAdd(newGuridScript);
+                newGurid.transform.SetParent(this.transform);
             }
         }
     }
-
 }
