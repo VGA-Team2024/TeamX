@@ -22,9 +22,6 @@ public class SMangerData : Singleton<SMangerData>
     
     [Header("BildMode")] [SerializeField] private GameObject _bildDemo;
     public event Action OnOBJSelectorViewChanged;
-
-    
-    
     
     [Header("GameData")] [SerializeField] private int _warPower; 
     [SerializeField] private int _gold = 10;
