@@ -4,20 +4,48 @@ using UnityEngine;
 
 public class Soldier : Building
 {
-    public override void Effect()
-    {
-        
-    }
+    /// <summary>兵士のゲームオブジェクト</summary>
+    [SerializeField,Tooltip("NPC兵士のゲームオブジェクト")] 
+    GameObject soldier = null;
 
-    // Start is called before the first frame update
+    /// <summary>SManagerDataがついてるGameObjectを入れる</summary>
+    [SerializeField,Tooltip("SManagerData")] 
+    GameObject _DataManagerObject = null;
+    SMangerData _DataManager;
+
+    Vector3 thisPosition;
+
     void Start()
     {
-        
+        thisPosition = this.transform.position;
+        StartCoroutine("BuildTimer");
+        _DataManager = _DataManagerObject.GetComponent<SMangerData>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnClick()
     {
-        
+        Effect();
+        Debug.Log("押されました");
+    }
+    public override void Effect()
+    {
+        if (!construction)
+        {
+            if (soldier)
+            {
+                if (_DataManager.Gold >= 100)
+                {
+                    _DataManager.Gold -= 100;
+                    Instantiate(soldier,thisPosition,Quaternion.identity);
+                }
+                else
+                {
+                    Debug.Log("Goldが足りません");
+                }
+            }
+            else
+            {
+                Debug.Log("soldierがnullです");
+            }
+        }
     }
 }

@@ -8,11 +8,14 @@ public class Mine : Building
 {
     /// <summary>’™‹àŠz</summary>
     [Tooltip("’™‹àŠz")]
-    [SerializeField]private int savingGold = 0;
+    [SerializeField] private int savingGold = 0;
 
     /// <summary>1•b‚²‚Æ‚É’™’~‚³‚ê‚éŠz</summary>
     [Tooltip("1•b‚²‚Æ‚É’™’~‚³‚ê‚éŠz")]
     [SerializeField] private int plusGold = 10;
+
+    [Tooltip("ƒ‹[ƒv‚ª~‚Ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ì”»’è")]
+    private bool maxGold = false;
 
     /// <summary>SManagerData‚ª‚Â‚¢‚Ä‚éGameObject‚ğ“ü‚ê‚é</summary>
     [Tooltip("SManagerData")]
@@ -25,29 +28,34 @@ public class Mine : Building
         StartCoroutine("BuildTimer");
     }
 
-    private void OnMouseEnter()
+    public void OnClick()
     {
-        bool _Click = Input.GetMouseButtonDown(0);
-        if (_Click)
+        _DataManager.Gold += savingGold;
+        savingGold = 0;
+        Debug.Log("Gold‚ğ‰ñû‚µ‚Ü‚µ‚½");
+        if (maxGold)
         {
-            Debug.Log("Gold‚ğ‰ñû‚µ‚Ü‚µ‚½");
+            Effect();
+            maxGold = false;
         }
     }
 
-    // Start is called before the first frame update
     public override void Effect()
     {
-        if (construction)
+        StartCoroutine(AddGold());
+    }
+
+    private IEnumerator AddGold()
+    {
+        while (savingGold < 1000)
         {
-            _BuildTime = 1;
-        }
-        else
-        {
-            if(savingGold < 1000)
+            savingGold += plusGold;
+            yield return new WaitForSeconds(1.0f);
+            if(savingGold == 1000)
             {
-                savingGold += plusGold;
+                maxGold = true;
+                Debug.Log("‚¨‹à‚ª‚½‚Ü‚è‚Ü‚µ‚½");
             }
         }
     }
-
 }
