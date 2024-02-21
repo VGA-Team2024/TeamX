@@ -28,6 +28,7 @@ public class Mine : Building
         StartCoroutine("BuildTimer");
     }
 
+    /// <summary>Object‚ª‰Ÿ‚³‚ê‚½‚ç’™‚Ü‚Á‚½‹à‚ğ‰ñû</summary>
     public void OnClick()
     {
         _DataManager.Gold += savingGold;
@@ -45,6 +46,7 @@ public class Mine : Building
         StartCoroutine(AddGold());
     }
 
+    /// <summary>1•b‚É1Gold¶¬‚·‚éˆ—</summary>
     private IEnumerator AddGold()
     {
         while (savingGold < 1000)

@@ -17,6 +17,7 @@ public abstract class Building : MonoBehaviour
     /// <summary>Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è(Å‰‚©‚ç‚ ‚é{İ‚È‚çfalse‚É‚·‚éj</summary>
     [SerializeField, Tooltip("Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è")]protected bool construction = true;
 
+    /// <summary>Œšİ’†‚Í“®‚©‚È‚¢‚æ‚¤‚É‚·‚éˆ—</summary>
     IEnumerator BuildTimer()
     {
         Debug.Log("StartCoroutine");

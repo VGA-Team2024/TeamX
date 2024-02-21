@@ -15,15 +15,19 @@ public class Camp : Building
     [SerializeField,Tooltip("兵士の収容数")]
     public int _SoldierCount = 0;
 
+    [Tooltip("この施設の場所")]
+    Vector3 _campPosition;
+
     void Start()
     {
-       // if()
         StartCoroutine("BuildTimer");
+        _campPosition = this.transform.position;
     }
 
+    /// <summary>Camp内に兵士が入ったらListに追加</summary>
     public void OnTriggerEnter(Collision collision)
     {
-        if (collision.gameObject.name == "兵士のオブジェクトの名前を入れる")
+        if (collision.gameObject.name == "soldier")
         {
             if(_SoldierCount <= 50)
             {
@@ -33,11 +37,9 @@ public class Camp : Building
         }
     }
 
+    /// <summary>建設されたらこの施設の位置をSetDestinationにSet</summary>
     public override void Effect()
     {
-        if (!construction)
-        { 
-            
-        }
+        _workerController.SetDestination(_campPosition);
     }
 }
