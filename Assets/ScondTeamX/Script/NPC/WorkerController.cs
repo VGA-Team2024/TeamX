@@ -22,7 +22,8 @@ public class WorkerController : NPCBase
     /// 最初にパトロール状態になったか
     /// </summary>
     bool IsPatrol = false;
-    void Start()
+
+    protected override void Start()
     {
         //NPCBaseのStartメソッドを呼ぶ
         base.Start();
