@@ -6,17 +6,21 @@ using UnityEngine.EventSystems;
 public abstract class Building : MonoBehaviour
 {
     public abstract void Effect();
+
+    [SerializeField] string _buildingName;
+
+    [SerializeField] Texture _buildingTexture;
     
     /// <summary>ŒšİŠÔ</summary>
-    [SerializeField, Tooltip("ŒšİŠÔ")] public int _BuildTime = 60;
+    [SerializeField, Tooltip("ŒšİŠÔ")] int _buildTime = 60;
 
     /// <summary>Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è(Å‰‚©‚ç‚ ‚é{İ‚È‚çfalse‚É‚·‚éj</summary>
-    [SerializeField, Tooltip("Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è")] public bool construction = true;
+    [SerializeField, Tooltip("Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è")]protected bool construction = true;
 
     IEnumerator BuildTimer()
     {
         Debug.Log("StartCoroutine");
-        yield return new WaitForSeconds(_BuildTime);
+        yield return new WaitForSeconds(_buildTime);
         if (construction)
         {
             Effect();

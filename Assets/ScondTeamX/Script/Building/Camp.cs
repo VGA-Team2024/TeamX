@@ -17,6 +17,7 @@ public class Camp : Building
 
     void Start()
     {
+       // if()
         StartCoroutine("BuildTimer");
     }
 
