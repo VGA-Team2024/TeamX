@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkerController : NPCBase
+public class SoldierController : NPCBase
 {
     /// <summary>
-    /// 現在の工員の状態
+    /// 現在の兵士の状態
     /// </summary>
-    WorkerState _workerState;
+    SoldierState _workerState;
     /// <summary>
-    /// 工員の状態
+    /// 兵士の状態
     /// </summary>
-    public enum WorkerState
+    public enum SoldierState
     {
         Idle,
         Move,
-        Working,
         Patrol
     }
     /// <summary>
@@ -27,30 +26,23 @@ public class WorkerController : NPCBase
     {
         //NPCBaseのStartメソッドを呼ぶ
         base.Start();
-        _workerState = WorkerState.Idle;
+        _workerState = SoldierState.Idle;
     }
 
     void Update()
     {
-        if (_workerState == WorkerState.Idle)
+        if (_workerState == SoldierState.Idle)
         {
             Agent.isStopped = true;
             IsPatrol = false;
         }  
-        else if(_workerState == WorkerState.Move)
+        else if(_workerState == SoldierState.Move)
         {
             IsPatrol = false;
             Agent.isStopped = false;
             Agent.destination = Destination;
         }//移動時の状態
-        else if(_workerState == WorkerState.Working)
-        {
-            IsPatrol = false;
-            Agent.isStopped = true;
-            //作業アニメーション
-
-        }//作業時の状態
-        else if(_workerState == WorkerState.Patrol)
+        else if(_workerState == SoldierState.Patrol)
         {
             if(!IsPatrol)
             {
