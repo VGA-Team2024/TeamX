@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,13 +11,13 @@ public abstract class Building : MonoBehaviour
 
     [SerializeField] Texture _buildingTexture;
     
-    /// <summary>ŒšİŠÔ</summary>
-    [SerializeField, Tooltip("ŒšİŠÔ")] int _buildTime = 60;
+    /// <summary>å»ºè¨­æ™‚é–“</summary>
+    [SerializeField, Tooltip("å»ºè¨­æ™‚é–“")] int _buildTime = 60;
 
-    /// <summary>Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è(Å‰‚©‚ç‚ ‚é{İ‚È‚çfalse‚É‚·‚éj</summary>
-    [SerializeField, Tooltip("Œšİ’†‚©‚Ç‚¤‚©‚Ì”»’è")]protected bool construction = true;
+    /// <summary>å»ºè¨­ä¸­ã‹ã©ã†ã‹ã®åˆ¤å®š(æœ€åˆã‹ã‚‰ã‚ã‚‹æ–½è¨­ãªã‚‰falseã«ã™ã‚‹ï¼‰</summary>
+    [SerializeField, Tooltip("å»ºè¨­ä¸­ã‹ã©ã†ã‹ã®åˆ¤å®š")]protected bool construction = true;
 
-    /// <summary>Œšİ’†‚Í“®‚©‚È‚¢‚æ‚¤‚É‚·‚éˆ—</summary>
+    /// <summary>å»ºè¨­ä¸­ã¯å‹•ã‹ãªã„ã‚ˆã†ã«ã™ã‚‹å‡¦ç†</summary>
     IEnumerator BuildTimer()
     {
         Debug.Log("StartCoroutine");
@@ -25,7 +25,7 @@ public abstract class Building : MonoBehaviour
         if (construction)
         {
             Effect();
-            Debug.Log("ŒšİŠ®—¹");
+            Debug.Log("å»ºè¨­å®Œäº†");
             construction = false;
         }
     }

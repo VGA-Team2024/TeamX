@@ -121,8 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a184cf4642ee10441a991a7d8a2fe429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _BuildTime: 60
+  _buildingName: 
+  _buildingTexture: {fileID: 0}
+  _buildTime: 60
   construction: 1
+  _workerController: {fileID: 0}
   _SoldierList: []
   _DataManagerObject: {fileID: 0}
   _SoldierCount: 0
@@ -135,7 +138,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 1857732022952448495}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 0
+  m_Shape: 1
   m_Extents: {x: 0.5, y: 1, z: 0.5}
   m_MoveThreshold: 0
   m_Carve: 1

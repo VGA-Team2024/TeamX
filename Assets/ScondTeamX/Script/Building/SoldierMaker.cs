@@ -1,54 +1,72 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Soldier : Building
 {
-    /// <summary>•ºm‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</summary>
-    [SerializeField,Tooltip("NPC•ºm‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg")] 
+    [SerializeField, Tooltip("MaxSoldierCount")]
+    MaxSoldierCount _maxSoldierCount;
+
+    /// <summary>å…µå£«ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
+    [SerializeField,Tooltip("NPCå…µå£«ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")] 
     GameObject soldier = null;
 
-    /// <summary>SManagerData‚ª‚Â‚¢‚Ä‚éGameObject‚ğ“ü‚ê‚é</summary>
+    /// <summary>SManagerDataãŒã¤ã„ã¦ã‚‹GameObjectã‚’å…¥ã‚Œã‚‹</summary>
     [SerializeField,Tooltip("SManagerData")] 
     GameObject _DataManagerObject = null;
-    SMangerData _DataManager;
+    SMangerData _dataManager;
+
+    /// <summary>ã‚½ãƒ«ã‚¸ãƒ£ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼</summary>
+    [SerializeField,Tooltip("SoldierController")]
+    SoldierController _soldierController;
 
     Vector3 thisPosition;
 
     void Start()
     {
+        _soldierController = soldier.GetComponent<SoldierController>();
+        _maxSoldierCount = GetComponent<MaxSoldierCount>();
         thisPosition = this.transform.position;
         StartCoroutine("BuildTimer");
-        _DataManager = _DataManagerObject.GetComponent<SMangerData>();
+        _dataManager = _DataManagerObject.GetComponent<SMangerData>();
     }
 
-    /// <summary>‰Ÿ‚³‚ê‚½‚çEffect‚ğ‹N“®</summary>
+    /// <summary>æŠ¼ã•ã‚ŒãŸã‚‰Effectã‚’èµ·å‹•</summary>
     public void OnClick()
     {
         Effect();
-        Debug.Log("‰Ÿ‚³‚ê‚Ü‚µ‚½");
+        Debug.Log("æŠ¼ã•ã‚Œã¾ã—ãŸ");
     }
 
-    /// <summary>Gold‚ª100‰~ˆÈã‚Á‚Ä‚¢‚½‚ç100‰~•¥‚Á‚Ä•ºm‚ğ¶¬</summary>
+    /// <summary>GoldãŒ100å††ä»¥ä¸ŠæŒã£ã¦ã„ãŸã‚‰100å††æ‰•ã£ã¦å…µå£«ã‚’ç”Ÿæˆ</summary>
     public override void Effect()
     {
         if (!construction)
         {
             if (soldier)
-            {
-                if (_DataManager.Gold >= 100)
+            { 
+                if (_dataManager.Gold >= 100)
                 {
-                    _DataManager.Gold -= 100;
-                    Instantiate(soldier,thisPosition,Quaternion.identity);
+                    if(_dataManager.WarPower <= _maxSoldierCount._maxSoldierCount)
+                    {
+                        _dataManager.Gold -= 100;
+                        Instantiate(soldier, thisPosition, Quaternion.identity);
+                        _dataManager.WarPower++;
+                        _maxSoldierCount._nowSoldierCount++;
+                    }
+                    else
+                    {
+                        Debug.Log("ã“ã‚Œä»¥ä¸Šã®ç”Ÿæˆã¯ä¸å¯èƒ½ã§ã™");
+                    }
                 }
                 else
                 {
-                    Debug.Log("Gold‚ª‘«‚è‚Ü‚¹‚ñ");
+                    Debug.Log("GoldãŒè¶³ã‚Šã¾ã›ã‚“");
                 }
             }
             else
             {
-                Debug.Log("soldier‚ªnull‚Å‚·");
+                Debug.Log("soldierãŒnullã§ã™");
             }
         }
     }

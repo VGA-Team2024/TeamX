@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,18 +6,18 @@ using UnityEngine.EventSystems;
 
 public class Mine : Building
 {
-    /// <summary>’™‹àŠz</summary>
-    [Tooltip("’™‹àŠz")]
+    /// <summary>è²¯é‡‘é¡</summary>
+    [Tooltip("è²¯é‡‘é¡")]
     [SerializeField] private int savingGold = 0;
 
-    /// <summary>1•b‚²‚Æ‚É’™’~‚³‚ê‚éŠz</summary>
-    [Tooltip("1•b‚²‚Æ‚É’™’~‚³‚ê‚éŠz")]
+    /// <summary>1ç§’ã”ã¨ã«è²¯è“„ã•ã‚Œã‚‹é¡</summary>
+    [Tooltip("1ç§’ã”ã¨ã«è²¯è“„ã•ã‚Œã‚‹é¡")]
     [SerializeField] private int plusGold = 10;
 
-    [Tooltip("ƒ‹[ƒv‚ª~‚Ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚Ì”»’è")]
+    [Tooltip("ãƒ«ãƒ¼ãƒ—ãŒæ­¢ã¾ã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®š")]
     private bool maxGold = false;
 
-    /// <summary>SManagerData‚ª‚Â‚¢‚Ä‚éGameObject‚ğ“ü‚ê‚é</summary>
+    /// <summary>SManagerDataãŒã¤ã„ã¦ã‚‹GameObjectã‚’å…¥ã‚Œã‚‹</summary>
     [Tooltip("SManagerData")]
     [SerializeField] GameObject _DataManagerObject = null;
     SMangerData _DataManager;
@@ -28,12 +28,12 @@ public class Mine : Building
         StartCoroutine("BuildTimer");
     }
 
-    /// <summary>Object‚ª‰Ÿ‚³‚ê‚½‚ç’™‚Ü‚Á‚½‹à‚ğ‰ñû</summary>
+    /// <summary>ObjectãŒæŠ¼ã•ã‚ŒãŸã‚‰è²¯ã¾ã£ãŸé‡‘ã‚’å›å</summary>
     public void OnClick()
     {
         _DataManager.Gold += savingGold;
         savingGold = 0;
-        Debug.Log("Gold‚ğ‰ñû‚µ‚Ü‚µ‚½");
+        Debug.Log("Goldã‚’å›åã—ã¾ã—ãŸ");
         if (maxGold)
         {
             Effect();
@@ -46,7 +46,7 @@ public class Mine : Building
         StartCoroutine(AddGold());
     }
 
-    /// <summary>1•b‚É1Gold¶¬‚·‚éˆ—</summary>
+    /// <summary>1ç§’ã«1Goldç”Ÿæˆã™ã‚‹å‡¦ç†</summary>
     private IEnumerator AddGold()
     {
         while (savingGold < 1000)
@@ -56,7 +56,7 @@ public class Mine : Building
             if(savingGold == 1000)
             {
                 maxGold = true;
-                Debug.Log("‚¨‹à‚ª‚½‚Ü‚è‚Ü‚µ‚½");
+                Debug.Log("ãŠé‡‘ãŒãŸã¾ã‚Šã¾ã—ãŸ");
             }
         }
     }
