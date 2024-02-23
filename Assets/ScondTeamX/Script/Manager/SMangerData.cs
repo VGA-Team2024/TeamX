@@ -1,33 +1,59 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SMangerData : Singleton<SMangerData>
 {
     [Header("Game")] [SerializeField,Tooltip("BuldingData")] private List<BuildingStruct> _buildingStructs = new List<BuildingStruct>();
-    [SerializeField] private Gurid _lastgurid;
-    [SerializeField] private EnumGameMode _eGameMode = EnumGameMode.Normal;
-    [SerializeField] private BuildingStruct _selectBuildingStruct;
+    [SerializeField,Tooltip("最後に触ったGuridClass")] private Gurid _lastgurid;
+    [SerializeField,Tooltip("ゲームステート状態")] private EnumGameMode _eGameMode = EnumGameMode.Normal;
+    [SerializeField,Tooltip("選択したビル情報")] private BuildingStruct _selectBuildingStruct;
     private List<Gurid> _gurids = new List<Gurid>();
     
-    [Header("Field")] [SerializeField] private float _fieldBildHight;
-    [SerializeField] private float _fieldToFieldRenge = 10;
-    [SerializeField] private GameObject _fieldgameObjectPrefubFild;
     
-    [Header("SelectorGurid")] [SerializeField] private Material _SelectorMaterial;
-    [SerializeField] private int _fieldRangex, _fieldRangez;
-    [SerializeField] private Quaternion _fieldquaternion;
+    [Header("Field")] [SerializeField,Tooltip("ビルの高さ")] private float _fieldBildHight;
+    [SerializeField,Tooltip("グリットの隙間")] private float _fieldToFieldRenge = 10;
+    [SerializeField,Tooltip("グリットのプレハブ")] private GameObject _fieldgameObjectPrefubFild;
+    [SerializeField,Tooltip("浅めの草")] private Mesh _mesh01;
+    [SerializeField,Tooltip("濃いめの草")] private Mesh _mesh02;
+    [SerializeField,Tooltip("グリットのマテリアル")] private Material _guridMaterial;
+
     
-    [Header("BildMode")] [SerializeField] private GameObject _bildDemo;
+    
+    [Header("SelectorGurid")] [SerializeField,Tooltip("選択した時のマテリアル")] private Material _SelectorMaterial;
+    [SerializeField,Tooltip("選択したグリットの位置")] private int _fieldRangex, _fieldRangez;
+    [SerializeField,Tooltip("グリットの回転")] private Quaternion _fieldquaternion;
+    
+    [Header("BildMode")] [SerializeField,Tooltip("選択したビルのdemo")] private GameObject _bildDemo;
+
+ 
+
     public event Action OnOBJSelectorViewChanged;
     
-    [Header("GameData")] [SerializeField] private int _warPower; 
-    [SerializeField] private int _gold = 10;
+    [Header("GameData")] [SerializeField,Tooltip("兵士の数")] private int _warPower; 
+    [SerializeField,Tooltip("金")] private int _gold = 10;
     
     public event Action OnGoldChanged;
 
+    
+    
+    public Material GuridMaterial
+    {
+        get => _guridMaterial;
+        set => _guridMaterial = value;
+    }
+
+    public Mesh Mesh02
+    {
+        get => _mesh02;
+        set => _mesh02 = value;
+    }
+
+    public Mesh Mesh01
+    {
+        get => _mesh01;
+        set => _mesh01 = value;
+    }
 
     public int Gold
     {

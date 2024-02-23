@@ -9,13 +9,13 @@ public class Gurid : MonoBehaviour
     private int _x;
     private int _z;
 
+    [SerializeField] private MeshFilter _defomeshFilter;
     [SerializeField] private MeshRenderer _meshRenderer;
-    [SerializeField] private Material _material;
-    [SerializeField] private Material _material2;
     private bool _hasBuilding = false;
 
     private GameObject _demobild;
 
+    
     public bool HasBuilding
     {
         get => _hasBuilding;
@@ -35,13 +35,24 @@ public class Gurid : MonoBehaviour
 
     public int Z
     {
-        set { _z = value; }
+        set
+        {
+            _z = value;
+            if ((X + Z) % 2 == 0)
+            {
+                _defomeshFilter.mesh = SMangerData.Instance.Mesh01;
+            }
+            else
+            {
+                _defomeshFilter.mesh = SMangerData.Instance.Mesh02;
+            }
+        }
         get { return _z; }
     }
 
     private void OnMouseEnter()
     {
-        SetMeshRMaterial(_material2);
+        SetMeshRMaterial(SMangerData.Instance.SelectorMaterial);
         SMangerData.Instance.Lastgurid = this;
 
         if (SMangerData.Instance.EGameMode != EnumGameMode.Bliding) return;
@@ -63,7 +74,7 @@ public class Gurid : MonoBehaviour
 
     private void OnMouseExit()
     {
-        SetMeshRMaterial(_material);
+        SetMeshRMaterial(SMangerData.Instance.GuridMaterial);
         if (_demobild != null)
         {
             Destroy(_demobild.gameObject);

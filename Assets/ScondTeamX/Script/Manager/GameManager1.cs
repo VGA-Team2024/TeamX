@@ -3,8 +3,7 @@ using UnityEngine;
 public class GameManager1 : MonoBehaviour
 {
     public static GameManager1 Instance;
-
-    public SMangerData _smd;
+    SMangerData _smd;
     protected void Awake()
     {
         if (Instance == null)
