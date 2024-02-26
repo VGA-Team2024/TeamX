@@ -4,6 +4,7 @@ public class GameManager1 : MonoBehaviour
 {
     public static GameManager1 Instance;
     SMangerData _smd;
+
     protected void Awake()
     {
         if (Instance == null)
@@ -20,6 +21,7 @@ public class GameManager1 : MonoBehaviour
     {
         _smd = SMangerData.Instance;
     }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1)) // 1 は右クリックを表すボタン番号です
@@ -27,17 +29,24 @@ public class GameManager1 : MonoBehaviour
             PlayerBuilding();
         }
     }
+
     public void PlayerBuilding()
     {
         if (_smd.EGameMode != EnumGameMode.Bliding) return;
 
-        if (_smd.Lastgurid.HasBuilding == false &&  _smd.BildDemo != null )
-        {
-            Instantiate(_smd.SelectBuildingStruct.GameObjectBilding,
-                new Vector3( _smd.Lastgurid.X *_smd.FieldToFieldRenge ,_smd.FieldBildHight,_smd.Lastgurid.Z *_smd.FieldToFieldRenge),_smd.Fieldquaternion);
-            _smd.Lastgurid.HasBuilding = true;
-        }
-     
-    }
+        if (_smd.Lastgurid.HasBuilding) return;
 
+        if (_smd.BildDemo == null) return;
+
+        if (_smd.SelectBuildingPrefub.GetComponent<Building>().Buildnum >= _smd.SelectBuildingPrefub.GetComponent<Building>().BuildnumMax) return;
+
+        _smd.SelectBuildingPrefub.GetComponent<Building>().Buildnum++;
+            
+        Instantiate(_smd.SelectBuildingPrefub,
+            new Vector3(_smd.Lastgurid.X * _smd.FieldToFieldRenge, _smd.FieldBildHight,
+                _smd.Lastgurid.Z * _smd.FieldToFieldRenge)
+            , _smd.Fieldquaternion);
+
+        _smd.Lastgurid.HasBuilding = true;
+    }
 }
