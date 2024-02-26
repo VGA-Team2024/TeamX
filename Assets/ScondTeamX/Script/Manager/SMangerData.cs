@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SMangerData : Singleton<SMangerData>
 {
-    [Header("Game")] [SerializeField,Tooltip("BuldingData")] private List<BuildingStruct> _buildingStructs = new List<BuildingStruct>();
     [SerializeField,Tooltip("最後に触ったGuridClass")] private Gurid _lastgurid;
     [SerializeField,Tooltip("ゲームステート状態")] private EnumGameMode _eGameMode = EnumGameMode.Normal;
-    [SerializeField,Tooltip("選択したビル情報")] private BuildingStruct _selectBuildingStruct;
+    [FormerlySerializedAs("_selectBuildingStruct")] [SerializeField,Tooltip("選択したビル情報")] private GameObject _selectBuildingPrefub;
+
+
+
     private List<Gurid> _gurids = new List<Gurid>();
     
     
@@ -25,6 +28,8 @@ public class SMangerData : Singleton<SMangerData>
     [SerializeField,Tooltip("グリットの回転")] private Quaternion _fieldquaternion;
     
     [Header("BildMode")] [SerializeField,Tooltip("選択したビルのdemo")] private GameObject _bildDemo;
+
+    [FormerlySerializedAs("_bildingPrefubs")] [SerializeField, Tooltip("BildingPrefubs")] private List<GameObject> bildingPrefubs;
 
  
 
@@ -70,12 +75,6 @@ public class SMangerData : Singleton<SMangerData>
         get => _warPower;
         set => _warPower = value;
     }
- 
-    public BuildingStruct SelectBuildingStruct
-    {
-        get => _selectBuildingStruct;
-        set => _selectBuildingStruct = value;
-    }
 
     public Gurid Lastgurid
     {
@@ -109,13 +108,6 @@ public class SMangerData : Singleton<SMangerData>
             OnOBJSelectorViewChanged?.Invoke();
         }
     }
-    
-    public List<BuildingStruct> BuildingStructs
-    {
-        get => _buildingStructs;
-        set => _buildingStructs = value;
-    }
-
     public EnumGameMode EGameMode
     {
         get => _eGameMode;
@@ -127,6 +119,17 @@ public class SMangerData : Singleton<SMangerData>
                 BildDemo = null;
             }
         }
+    }
+    public GameObject SelectBuildingPrefub
+    {
+        get => _selectBuildingPrefub;
+        set => _selectBuildingPrefub = value;
+    }
+
+    public List<GameObject> BildingPrefubs
+    {
+        get => bildingPrefubs;
+        set => bildingPrefubs = value;
     }
 
 
@@ -171,32 +174,6 @@ public class SMangerData : Singleton<SMangerData>
     }
 }
 
-
-[Serializable]
-public struct BuildingStruct
-{
-    [SerializeField] private GameObject _gameObjectBilding;
-    [SerializeField] private Texture _texture;
-    [SerializeField] private string _name;
-
-    public GameObject GameObjectBilding
-    {
-        get => _gameObjectBilding;
-        set => _gameObjectBilding = value;
-    }
-
-    public Texture BuldingTexture
-    {
-        get => _texture;
-        set => _texture = value;
-    }
-
-    public string BuldingName
-    {
-        get => _name;
-        set => _name = value;
-    }
-}
 
 public enum EnumGameMode
 {

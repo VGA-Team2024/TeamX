@@ -52,6 +52,15 @@ public class Gurid : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (SMangerData.Instance.Lastgurid != null)
+        {
+            SMangerData.Instance.Lastgurid.Materialset();
+            
+            if (SMangerData.Instance.Lastgurid._demobild != null)
+            {
+                Destroy(SMangerData.Instance.Lastgurid._demobild.gameObject);
+            }
+        }
         SetMeshRMaterial(SMangerData.Instance.SelectorMaterial);
         SMangerData.Instance.Lastgurid = this;
 
@@ -72,12 +81,13 @@ public class Gurid : MonoBehaviour
         }
     }
 
-    private void OnMouseExit()
+    public void Materialset()
     {
         SetMeshRMaterial(SMangerData.Instance.GuridMaterial);
-        if (_demobild != null)
-        {
-            Destroy(_demobild.gameObject);
-        }
+    }
+
+    private void OnMouseExit()
+    {
+
     }
 }
