@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier : Building
+public class SoldierMaker : Building
 {
     [SerializeField, Tooltip("MaxSoldierCount")]
     MaxSoldierCount _maxSoldierCount;
