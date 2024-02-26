@@ -43,5 +43,6 @@ public class UISBuldingBotton : MonoBehaviour
     {
         SMangerData.Instance.SelectBuildingPrefub = SMangerData.Instance.BildingPrefubs[_structNum];
         SMangerData.Instance.BildDemo = SMangerData.Instance.BildingPrefubs[_structNum];
+        UIManager.Instance.UIMSelectBuildBuilding();
     }
 }

@@ -38,11 +38,7 @@ public class UISBildScrollScript : MonoBehaviour
     {
         UpdateContent();
     }
-
-    public void Close()
-    {
-        SMangerData.Instance.EGameMode = EnumGameMode.Normal;
-    }
+    
 
     private void OnDisable()
     {
