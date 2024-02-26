@@ -33,7 +33,7 @@ public class WorkerController : NPCBase
 
     void Update()
     {
-        if (_workerState == WorkerState.Idle)
+        if(_workerState == WorkerState.Idle)
         {
             Agent.isStopped = true;
             IsPatrol = false;

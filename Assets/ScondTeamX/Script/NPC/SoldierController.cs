@@ -27,18 +27,18 @@
 
     void Update()
     {
-        if (_workerState == SoldierState.Idle)
+        if(_workerState == SoldierState.Idle)
         {
             Agent.isStopped = true;
             IsPatrol = false;
         }
-        else if (_workerState == SoldierState.Move)
+        else if(_workerState == SoldierState.Move)
         {
             IsPatrol = false;
             Agent.isStopped = false;
             Agent.destination = Destination;
         }//移動時の状態
-        else if (_workerState == SoldierState.Patrol)
+        else if(_workerState == SoldierState.Patrol)
         {
             if (!IsPatrol)
             {
