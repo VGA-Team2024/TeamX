@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
-
 public abstract class Building : MonoBehaviour
 {
     public abstract void Effect();
@@ -11,12 +8,18 @@ public abstract class Building : MonoBehaviour
     public string _buildingName;
 
     public Texture _buildingTexture;
-    
-    
 
-    [SerializeField, Tooltip("建築物の数")] protected int _buildnum = 0;
+
+
+    
+    [SerializeField, Tooltip("建築物数")] protected  int _buildnum = 0;
     [SerializeField, Tooltip("建築物最大数")] protected int _buildnumMax = 5;
     [SerializeField, Tooltip("建築物消費")] protected int _buildPrice = 100;
+
+    private void Awake()
+    {
+        _buildnum = 0;
+    }
 
 
     public int BuildPrice

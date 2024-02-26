@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 2331735746257083833}
   - component: {fileID: 6778772091407661495}
   m_Layer: 5
-  m_Name: GameUI
+  m_Name: UI BuildWar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
