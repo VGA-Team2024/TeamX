@@ -9,6 +9,9 @@ public class UISBuldingBotton : MonoBehaviour
 {
     [SerializeField] private RawImage _rawImage;
     [SerializeField] private TMP_Text _tmpName;
+    [SerializeField,Tooltip("建築物の数")] private TMP_Text _tmpBnum;
+    [SerializeField] private TMP_Text _tmpPrice;
+
     [SerializeField] private int _structNum;
 
     public int StructNum
@@ -26,10 +29,19 @@ public class UISBuldingBotton : MonoBehaviour
     {
         set { _tmpName.SetText(value); }
     }
+    public string BuldingNum
+    {
+        set { _tmpBnum.SetText(value); }
+    }
+    public string BuldingPrice
+    {
+        set { _tmpPrice.SetText(value); }
+    }
+    
 
     public void OnbottonClick()
     {
-        SMangerData.Instance.SelectBuildingStruct = SMangerData.Instance.BuildingStructs[_structNum];
-        SMangerData.Instance.BildDemo = SMangerData.Instance.BuildingStructs[_structNum].GameObjectBilding;
+        SMangerData.Instance.SelectBuildingPrefub = SMangerData.Instance.BildingPrefubs[_structNum];
+        SMangerData.Instance.BildDemo = SMangerData.Instance.BildingPrefubs[_structNum];
     }
 }

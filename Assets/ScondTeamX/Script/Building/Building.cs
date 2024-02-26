@@ -2,20 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public abstract class Building : MonoBehaviour
 {
     public abstract void Effect();
 
-    [SerializeField] string _buildingName;
+    public string _buildingName;
 
-    [SerializeField] Texture _buildingTexture;
+    public Texture _buildingTexture;
     
+    
+
+    [SerializeField, Tooltip("建築物の数")] protected int _buildnum = 0;
+    [SerializeField, Tooltip("建築物最大数")] protected int _buildnumMax = 5;
+    [SerializeField, Tooltip("建築物消費")] protected int _buildPrice = 100;
+
+
+    public int BuildPrice
+    {
+        get => _buildPrice;
+        set => _buildPrice = value;
+    }
+
+    public int Buildnum
+    {
+        get => _buildnum;
+        set => _buildnum = value;
+    }
+
+    public int BuildnumMax
+    {
+        get => _buildnumMax;
+        set => _buildnumMax = value;
+    }
+
+
     /// <summary>建設時間</summary>
     [SerializeField, Tooltip("建設時間")] int _buildTime = 60;
 
     /// <summary>建設中かどうかの判定(最初からある施設ならfalseにする）</summary>
-    [SerializeField, Tooltip("建設中かどうかの判定")]protected bool construction = true;
+    [SerializeField, Tooltip("建設中かどうかの判定")]
+    protected bool construction = true;
 
     /// <summary>建設中は動かないようにする処理</summary>
     IEnumerator BuildTimer()
