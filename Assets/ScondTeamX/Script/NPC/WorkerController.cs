@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SoldierController;
 
 public class WorkerController : NPCBase
 {
@@ -32,7 +33,7 @@ public class WorkerController : NPCBase
 
     void Update()
     {
-        if (_workerState == WorkerState.Idle)
+        if(_workerState == WorkerState.Idle)
         {
             Agent.isStopped = true;
             IsPatrol = false;
@@ -59,5 +60,14 @@ public class WorkerController : NPCBase
             }
             Patrol();
         }//うろうろする処理
+    }
+
+    /// <summary>
+    /// Stateを変える
+    /// </summary>
+    /// <param name="stateName">変えたいステート</param>
+    public void ChangeState(WorkerState stateName)
+    {
+        _workerState = stateName;
     }
 }
