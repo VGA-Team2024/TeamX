@@ -122,11 +122,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildingName: 
   _buildingTexture: {fileID: 0}
-  _buildTime: 60
+  _buildnum: 0
+  _buildnumMax: 5
+  _buildPrice: 100
+  _buildTime: 1
   construction: 1
   savingGold: 0
   plusGold: 10
   _DataManagerObject: {fileID: 0}
+  _workerControllerObject: {fileID: 0}
 --- !u!114 &6304437278220969877
 MonoBehaviour:
   m_ObjectHideFlags: 0
