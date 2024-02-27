@@ -70,4 +70,13 @@ public class WorkerController : NPCBase
     {
         _workerState = stateName;
     }
+
+    /// <summary>
+    /// Stateのゲッター
+    /// </summary>
+    /// <returns>現在のステート</returns>
+    public WorkerState GetState()
+    {
+        return _workerState;
+    }
 }
