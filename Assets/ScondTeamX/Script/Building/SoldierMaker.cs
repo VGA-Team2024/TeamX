@@ -32,18 +32,24 @@ public class SoldierMaker : Building
         thisPosition = this.transform.position;
         _workerControllerObject = GameObject.Find("Worker");
         _workerController = _workerControllerObject.GetComponent<WorkerController>();
-        _workerController.ChangeState(WorkerController.WorkerState.Move);
-        _workerController.SetDestination(thisPosition);
     }
     void Start()
     {
         _maxSoldierCountGameObject = GameObject.Find("MaxSoldierCount");
         _maxSoldierCount = _maxSoldierCountGameObject.GetComponent<MaxSoldierCount>();
-        StartCoroutine("BuildTimer");
         _DataManagerObject = GameObject.Find("SManagerData");
         _dataManager = _DataManagerObject.GetComponent<SMangerData>();
     }
 
+    void Update()
+    {
+        if (_workerController.GetState() == WorkerController.WorkerState.Idle && construction == true)
+        {
+            StartCoroutine("BuildTimer");
+            _workerController.ChangeState(WorkerController.WorkerState.Move);
+            _workerController.SetDestination(thisPosition);
+        }
+    }
     /// <summary>押されたらEffectを起動</summary>
     public void OnClick()
     {
@@ -96,7 +102,7 @@ public class SoldierMaker : Building
                 Debug.Log("soldierがnullです");
             }
         }
-        if (construction == true && work == true)
+        if (work == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Idle);
         }
