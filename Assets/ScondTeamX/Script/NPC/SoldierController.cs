@@ -1,9 +1,11 @@
-﻿public class SoldierController : NPCBase
+﻿using static WorkerController;
+
+public class SoldierController : NPCBase
 {
     /// <summary>
     /// 現在の兵士の状態
     /// </summary>
-    SoldierState _workerState;
+    SoldierState _soldierState;
     /// <summary>
     /// 兵士の状態
     /// </summary>
@@ -22,23 +24,23 @@
     {
         //NPCBaseのStartメソッドを呼ぶ
         base.Awake();
-        _workerState = SoldierState.Idle;
+        _soldierState = SoldierState.Idle;
     }
 
     void Update()
     {
-        if(_workerState == SoldierState.Idle)
+        if(_soldierState == SoldierState.Idle)
         {
             Agent.isStopped = true;
             IsPatrol = false;
         }
-        else if(_workerState == SoldierState.Move)
+        else if(_soldierState == SoldierState.Move)
         {
             IsPatrol = false;
             Agent.isStopped = false;
             Agent.destination = Destination;
         }//移動時の状態
-        else if(_workerState == SoldierState.Patrol)
+        else if(_soldierState == SoldierState.Patrol)
         {
             if (!IsPatrol)
             {
@@ -55,6 +57,15 @@
     /// <param name="stateName">変えたいステート</param>
     public void ChangeState(SoldierState stateName)
     {
-        _workerState = stateName;
+        _soldierState = stateName;
+    }
+
+    /// <summary>
+    /// Stateのゲッター
+    /// </summary>
+    /// <returns>現在のステート</returns>
+    public SoldierState GetState()
+    {
+        return _soldierState;
     }
 }
