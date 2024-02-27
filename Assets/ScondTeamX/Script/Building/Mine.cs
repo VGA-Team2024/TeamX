@@ -22,10 +22,25 @@ public class Mine : Building
     [SerializeField] GameObject _DataManagerObject = null;
     SMangerData _DataManager;
 
+    [SerializeField, Tooltip("WorkerController")]
+    GameObject _workerControllerObject = null;
+    WorkerController _workerController;
+
+    Vector3 thisPos;
+
     void Awake()
     {
+        thisPos = this.transform.position;
+        _workerControllerObject = GameObject.Find("Worker");
+        _workerController = _workerControllerObject.GetComponent<WorkerController>();
+        _DataManagerObject = GameObject.Find("SManagerData");
         _DataManager = _DataManagerObject.GetComponent<SMangerData>();
         StartCoroutine("BuildTimer");
+    }
+
+    void Start()
+    {
+        _workerController.SetDestination(thisPos);
     }
 
     /// <summary>Objectが押されたら貯まった金を回収</summary>

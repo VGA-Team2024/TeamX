@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1857732022952448482}
   - component: {fileID: 1857732022952448481}
   - component: {fileID: 1857732022952448480}
-  - component: {fileID: 4573008860578388783}
   m_Layer: 0
   m_Name: testCamp
   m_TagString: Untagged
@@ -123,25 +122,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildingName: 
   _buildingTexture: {fileID: 0}
-  _buildTime: 60
+  _buildnum: 0
+  _buildnumMax: 5
+  _buildPrice: 100
+  _buildTime: 1
   construction: 1
-  _workerController: {fileID: 0}
   _SoldierList: []
-  _DataManagerObject: {fileID: 0}
+  _dataManager: {fileID: 1147046541227279442, guid: 39e323bdae939154b9163605a95612cf, type: 3}
+  _maxSoldierCountObject: {fileID: 0}
+  _workerControllerObject: {fileID: 0}
+  _thisCampNumber: 0
   _SoldierCount: 0
---- !u!208 &4573008860578388783
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857732022952448495}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
-  m_MoveThreshold: 0
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0

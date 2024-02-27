@@ -19,5 +19,9 @@ public class MaxSoldierCount : MonoBehaviour
     [SerializeField,Tooltip("現在の兵士の数")]
     public int _nowSoldierCount = 0;
 
+    [SerializeField,Tooltip("戦争で失う兵士の数")]
     public int difference = 0;
+
+    [SerializeField, Tooltip("入隊可能なCampの位置")]
+    public Vector3 campPos;
 }
