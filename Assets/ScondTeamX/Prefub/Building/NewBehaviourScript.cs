@@ -6,10 +6,13 @@ public class NewBehaviourScript : MonoBehaviour
 {
 
     [SerializeField] GameObject n = null;
-    // Start is called before the first frame update
+    [SerializeField] int m = 0;
+
+    Vector3 vec;
     void Start()
     {
-        Invoke("OnClick", 5);
+        Invoke("OnClick", m);
+        vec = this.transform.position;
     }
 
     // Update is called once per frame
@@ -20,6 +23,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     void OnClick()
     {
-        Instantiate(n);
+        Instantiate(n,vec,Quaternion.identity);
+
+
     }
 }

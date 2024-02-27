@@ -18,10 +18,6 @@ public class SoldierMaker : Building
     GameObject _DataManagerObject = null;
     SMangerData _dataManager;
 
-    /// <summary>ソルジャーコントローラー</summary>
-    [SerializeField,Tooltip("SoldierController")]
-    SoldierController _soldierController;
-
     [SerializeField, Tooltip("WorkerController")]
     GameObject _workerControllerObject = null;
     WorkerController _workerController;
@@ -29,20 +25,23 @@ public class SoldierMaker : Building
     /// <summary>この施設の場所</summary>
     Vector3 thisPosition;
 
+    bool work = false;
+
+    private void Awake()
+    {
+        thisPosition = this.transform.position;
+        _workerControllerObject = GameObject.Find("Worker");
+        _workerController = _workerControllerObject.GetComponent<WorkerController>();
+        _workerController.ChangeState(WorkerController.WorkerState.Move);
+        _workerController.SetDestination(thisPosition);
+    }
     void Start()
     {
-        _soldierController = soldier.GetComponent<SoldierController>();
         _maxSoldierCountGameObject = GameObject.Find("MaxSoldierCount");
         _maxSoldierCount = _maxSoldierCountGameObject.GetComponent<MaxSoldierCount>();
-        thisPosition = this.transform.position;
         StartCoroutine("BuildTimer");
         _DataManagerObject = GameObject.Find("SManagerData");
         _dataManager = _DataManagerObject.GetComponent<SMangerData>();
-        _soldierController = soldier.GetComponent<SoldierController>();
-
-        _workerControllerObject = GameObject.Find("Worker");
-        _workerController = _workerControllerObject.GetComponent<WorkerController>();
-        _workerController.SetDestination(thisPosition);
     }
 
     /// <summary>押されたらEffectを起動</summary>
@@ -50,6 +49,17 @@ public class SoldierMaker : Building
     {
         Effect();
         Debug.Log("押されました");
+    }
+
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.name == "Worker" && construction == true)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Working);
+            work = true;
+            Debug.Log("good");
+        }
+        Debug.Log("but");
     }
 
     /// <summary>Goldが100円以上持っていたら100円払って兵士を生成</summary>
@@ -66,7 +76,7 @@ public class SoldierMaker : Building
                         _dataManager.Gold -= 100;
                         GameObject _soldier = Instantiate(soldier, thisPosition, Quaternion.identity);
                         SoldierController sol =  _soldier.GetComponent<SoldierController>();
-                        _soldierController.ChangeState(SoldierState.Move);
+                        sol.ChangeState(SoldierState.Move);
                         sol.SetDestination(_maxSoldierCount.campPos);
                         _maxSoldierCount._nowSoldierCount++;
                         _dataManager.WarPower++;
@@ -85,6 +95,10 @@ public class SoldierMaker : Building
             {
                 Debug.Log("soldierがnullです");
             }
+        }
+        if (construction == true && work == true)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Idle);
         }
     }
 }
