@@ -35,15 +35,22 @@ public class Mine : Building
         thisPos = this.transform.position;
         _workerControllerObject = GameObject.Find("Worker");
         _workerController = _workerControllerObject.GetComponent<WorkerController>();
-        _workerController.ChangeState(WorkerController.WorkerState.Move);
-        _workerController.SetDestination(thisPos);
-        StartCoroutine("BuildTimer");
     }
 
     void Start()
     {
         _DataManagerObject = GameObject.Find("SManagerData");
         _DataManager = _DataManagerObject.GetComponent<SMangerData>();
+    }
+
+    void Update()
+    {
+        if (_workerController.GetState() == WorkerController.WorkerState.Idle && construction == true)
+        {
+            StartCoroutine("BuildTimer");
+            _workerController.ChangeState(WorkerController.WorkerState.Move);
+            _workerController.SetDestination(thisPos);
+        }
     }
 
     /// <summary>Objectが押されたら貯まった金を回収</summary>
@@ -70,7 +77,7 @@ public class Mine : Building
     public override void Effect()
     {
         StartCoroutine(AddGold());
-        if (construction == true && work == true)
+        if (work == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Idle);
         }

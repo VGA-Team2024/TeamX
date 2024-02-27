@@ -35,6 +35,7 @@ public class Camp : Building
     [Tooltip("ソルジャーコントローラー")]
     SoldierController _solcon;
 
+    /// <summary></summary>
     bool work = false;
 
     void Awake()
@@ -42,13 +43,10 @@ public class Camp : Building
         _workerControllerObject = GameObject.Find("Worker");
         _workerController = _workerControllerObject.GetComponent<WorkerController>();
         _thisCampPosition = this.transform.position;
-        _workerController.ChangeState(WorkerController.WorkerState.Move);
-        _workerController.SetDestination(_thisCampPosition);
     }
 
     void Start()
     {
-        StartCoroutine("BuildTimer");
         _dataManager = SMangerData.Instance;
         _maxSoldierCountObject = GameObject.Find("MaxSoldierCount");
         _maxSoldierCount = _maxSoldierCountObject.GetComponent<MaxSoldierCount>();
@@ -71,6 +69,13 @@ public class Camp : Building
         if (_maxSoldierCount._nowSoldierCount > _dataManager.WarPower && mainCamp == true)
         {
             warResult();
+        }
+
+        if (_workerController.GetState() == WorkerController.WorkerState.Idle && construction == true)
+        {
+            StartCoroutine("BuildTimer");
+            _workerController.ChangeState(WorkerController.WorkerState.Move);
+            _workerController.SetDestination(_thisCampPosition);
         }
     }
 
@@ -170,7 +175,7 @@ public class Camp : Building
             mainCamp = true;
             Debug.Log("CampSet");
         }
-        if(construction == true && work == true)
+        if(work == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Idle);
         }
