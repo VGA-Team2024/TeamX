@@ -36,7 +36,7 @@ public class NPCBase : MonoBehaviour
     /// パトロール時のタイマー
     /// </summary>
     private float _patrolTimer;
-    virtual protected void Start()
+    virtual protected void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
         //最初は、止めておく

@@ -24,10 +24,10 @@ public class WorkerController : NPCBase
     /// </summary>
     bool IsPatrol = false;
 
-    protected override void Start()
+    protected override void Awake()
     {
         //NPCBaseのStartメソッドを呼ぶ
-        base.Start();
+        base.Awake();
         _workerState = WorkerState.Idle;
     }
 

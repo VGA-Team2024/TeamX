@@ -18,10 +18,10 @@
     /// </summary>
     bool IsPatrol = false;
 
-    protected override void Start()
+    protected override void Awake()
     {
         //NPCBaseのStartメソッドを呼ぶ
-        base.Start();
+        base.Awake();
         _workerState = SoldierState.Idle;
     }
 
