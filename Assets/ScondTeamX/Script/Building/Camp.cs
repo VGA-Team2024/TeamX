@@ -32,14 +32,23 @@ public class Camp : Building
     [Tooltip("このCampが空いてるか")]
     bool mainCamp = false;
 
-    
-    void Start()
+    [Tooltip("ソルジャーコントローラー")]
+    SoldierController _solcon;
+
+    bool work = false;
+
+    void Awake()
     {
-        StartCoroutine("BuildTimer");
         _workerControllerObject = GameObject.Find("Worker");
         _workerController = _workerControllerObject.GetComponent<WorkerController>();
         _thisCampPosition = this.transform.position;
+        _workerController.ChangeState(WorkerController.WorkerState.Move);
         _workerController.SetDestination(_thisCampPosition);
+    }
+
+    void Start()
+    {
+        StartCoroutine("BuildTimer");
         _dataManager = SMangerData.Instance;
         _maxSoldierCountObject = GameObject.Find("MaxSoldierCount");
         _maxSoldierCount = _maxSoldierCountObject.GetComponent<MaxSoldierCount>();
@@ -100,40 +109,46 @@ public class Camp : Building
     /// <summary>Camp内に兵士が入ったらListに追加</summary>
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Soldier")
+        if (collision.gameObject.tag == "soldier" && _SoldierCount < 50 && mainCamp == true)
         {
+            _solcon = collision.gameObject.GetComponent<SoldierController>();
             _SoldierList.Add(collision.gameObject);
             _SoldierCount = _SoldierList.Count;
-            if (_SoldierCount < 50 && _SoldierCount >= 15)
+            if (_SoldierCount == 49)
             {
-                collision.gameObject.SetActive(false);
-                if(_SoldierCount == 50)
-                {
-                    mainCamp = false;
-                    _maxSoldierCount._maxCamp++;
-                    _maxSoldierCount._changeCamp = true;
-                }//このCampが満室になったら目的地のCampを変える
+                mainCamp = false;
+                _maxSoldierCount._maxCamp++;
+                _maxSoldierCount._changeCamp = true;
+                Debug.Log("チェンジ");
+                //このCampが満室になったら目的地のCampを変える
             }
-            else if (_SoldierCount < 15 && _SoldierCount >= 10)
+            else if (_SoldierCount < 49 && _SoldierCount >= 25)
             {
-                SoldierController _solcon = collision.gameObject.GetComponent<SoldierController>();
                 _solcon.ChangeState(SoldierState.Patrol);
             }
             else
             {
                 Vector3 solArr = transform.position;
                 if(_SoldierCount == 1 || _SoldierCount == 2 ||_SoldierCount == 3)
-                    solArr.x = 1.0f;
+                    solArr.x = 2.0f;
                 if(_SoldierCount == 3 || _SoldierCount == 4 || _SoldierCount == 5)
-                    solArr.z = 1.0f;
+                    solArr.z = 2.0f;
                 if (_SoldierCount == 5 || _SoldierCount == 6 || _SoldierCount == 7)
-                    solArr.x = -1.0f;
+                    solArr.x = -2.0f;
                 if (_SoldierCount == 7 || _SoldierCount == 8 || _SoldierCount == 1)
-                    solArr.z = -1.0f;
-                SoldierController _solcon = collision.gameObject.GetComponent<SoldierController>();
+                    solArr.z = -2.0f;
+
                 _solcon.SetDestination(_thisCampPosition + solArr);
-                _solcon.ChangeState(SoldierState.Idle);
+                Invoke("Idle", 1.0f);
             }
+            Debug.Log("soldier");
+            collision.gameObject.tag = "Finish";
+        }
+
+        if(collision.gameObject.name == "Worker" && construction == true)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Working);
+            work = true;
         }
     }
 
@@ -155,5 +170,14 @@ public class Camp : Building
             mainCamp = true;
             Debug.Log("CampSet");
         }
+        if(construction == true && work == true)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Idle);
+        }
+    }
+
+    void Idle()
+    {
+        _solcon.ChangeState(SoldierState.Idle);
     }
 }
