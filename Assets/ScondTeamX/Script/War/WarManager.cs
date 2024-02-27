@@ -18,6 +18,10 @@ public class WarManager : MonoBehaviour
     int _playerWarPower;
     /// <summary> 自動で戦争が始まるタイマー </summary>
     float _timer;
+    [SerializeField, Tooltip("勝利画面")]
+    Animator _victoryAnimator;
+    [SerializeField, Tooltip("勝利画面")]
+    Animator _loseAnimator;
     private void Awake()
     {
         if (Instance == null)
@@ -64,7 +68,8 @@ public class WarManager : MonoBehaviour
         //戦力を敵戦力の半分減らす
         _sMangerData.WarPower -= _enemyPower / 2;
         //勝利画面を出す
-        Debug.Log("勝利");
+        //Debug.Log("勝利");
+        _victoryAnimator.SetTrigger("Victory");
     }
 
     /// <summary>戦争に負けた時の処理 </summary>
@@ -78,5 +83,7 @@ public class WarManager : MonoBehaviour
         _sMangerData.Gold = 0;
         //貯蔵されているゴールドを０にする
 
+        //敗北画面を表示
+        _loseAnimator.SetTrigger("Lose");
     }
 }
