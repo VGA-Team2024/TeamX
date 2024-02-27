@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
     {
         _uiSelectGurid.SetActive(false);
         _buildingListUI.SetActive(true);
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelect;
     }
     
     public void UIMSelectGurid()

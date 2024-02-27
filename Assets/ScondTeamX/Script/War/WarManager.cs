@@ -7,7 +7,7 @@ public class WarManager : MonoBehaviour
 {
     /// <summary>WarManager </summary>
     public static WarManager Instance;
-    [SerializeField, Tooltip("兵力のテキスト")] GameObject _enemyWarPowerObj;
+    [SerializeField, Tooltip("兵力のテキスト")] TextMeshProUGUI _enemyWarPowerObj;
     [SerializeField, Tooltip("現在の敵兵力")] int _enemyPower = 1;
     [SerializeField, Tooltip("自動で戦争が始まる間隔(秒)")] float _warInterval = 21600f;
     /// <summary>兵力のテキスト </summary>
@@ -31,6 +31,8 @@ public class WarManager : MonoBehaviour
         _enemyWarPowerText = _enemyWarPowerObj.GetComponent<TMP_Text>();
         _enemyWarPowerText.text = "Next:兵力" + _enemyPower;
         _timer = 0;
+        UpdateWarPower();
+
     }
 
     private void Update()
@@ -50,6 +52,8 @@ public class WarManager : MonoBehaviour
             WarWin();
         else
             WarLose();
+        UpdateWarPower();
+
     }
 
     /// <summary>戦争に勝ったときの処理 </summary>
@@ -65,6 +69,8 @@ public class WarManager : MonoBehaviour
         _sMangerData.WarPower -= _enemyPower / 2;
         //勝利画面を出す
         Debug.Log("勝利");
+        UpdateWarPower();
+
     }
 
     /// <summary>戦争に負けた時の処理 </summary>
@@ -77,6 +83,11 @@ public class WarManager : MonoBehaviour
         //ゴールドを０にする
         _sMangerData.Gold = 0;
         //貯蔵されているゴールドを０にする
+        UpdateWarPower();
+    }
 
+    void UpdateWarPower()
+    {
+        _enemyWarPowerObj.SetText(_enemyPower.ToString());
     }
 }

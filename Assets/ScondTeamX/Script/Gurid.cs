@@ -78,6 +78,7 @@ public class Gurid : MonoBehaviour
             {
                 mate.material = SMangerData.Instance.SelectorMaterial;
             }
+            
             foreach (var a in _demobild.GetComponentsInChildren<Building>())
             {
                 a.enabled = false;

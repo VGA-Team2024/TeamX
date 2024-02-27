@@ -13,7 +13,7 @@ public class UIVGold : MonoBehaviour
     }
     private void UpdateText()
     {
-        _textMeshPro.SetText(SMangerData.Instance.Gold.ToString());
+        _textMeshPro.SetText(SMangerData.Instance.Gold + "G");
     }
     private void OnEnable()
     {
