@@ -64,7 +64,7 @@ public class Gurid : MonoBehaviour
         SetMeshRMaterial(SMangerData.Instance.SelectorMaterial);
         SMangerData.Instance.Lastgurid = this;
 
-        if (SMangerData.Instance.EGameMode != EnumGameMode.Bliding) return;
+        if (SMangerData.Instance.EGameMode != EnumGameMode.BlidingSelectGurid) return;
         if (SMangerData.Instance.BildDemo != null)
         {
             _demobild = Instantiate(SMangerData.Instance.BildDemo
@@ -77,6 +77,10 @@ public class Gurid : MonoBehaviour
             foreach (var mate in _demobild.GetComponentsInChildren<MeshRenderer>())
             {
                 mate.material = SMangerData.Instance.SelectorMaterial;
+            }
+            foreach (var a in _demobild.GetComponentsInChildren<Building>())
+            {
+                a.enabled = false;
             }
         }
     }

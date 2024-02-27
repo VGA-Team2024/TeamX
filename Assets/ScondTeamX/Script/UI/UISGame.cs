@@ -6,6 +6,6 @@ public class UISGame : MonoBehaviour
 {
     public void BildingBotton()
     {
-        SMangerData.Instance.EGameMode = EnumGameMode.Bliding;
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelect;
     }
 }

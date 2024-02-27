@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _dataUI;
     [SerializeField] private GameObject _agreeUI;
 
+    [SerializeField] private GameObject _uiSelectGurid;
+
+    [SerializeField] private GameObject _obstacle;
+ 
     
     public static UIManager Instance;
     SMangerData _smd;
@@ -28,6 +32,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         _smd = SMangerData.Instance;
+        _dataUI.SetActive(true);
     }
 
     public void UIMBuildAndWarBuild()
@@ -35,7 +40,7 @@ public class UIManager : MonoBehaviour
         _buildingListUI.SetActive(true);
         _buildAndWarUI.SetActive(false);
 
-        SMangerData.Instance.EGameMode = EnumGameMode.Bliding;
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelect;
     }
 
     public void UIMBuildingListUIClose()
@@ -48,16 +53,47 @@ public class UIManager : MonoBehaviour
     public void UIMSelectBuildBuilding()
     {
         _buildingListUI.SetActive(false);
+        _uiSelectGurid.SetActive(true);
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelectGurid;
+    }
+
+    public void UIMSelectGuridCansel()
+    {
+        _uiSelectGurid.SetActive(false);
+        _buildingListUI.SetActive(true);
+    }
+    
+    public void UIMSelectGurid()
+    {
+        _obstacle.SetActive(true);
         _agreeUI.SetActive(true);
+        _uiSelectGurid.SetActive(false);
+
+        _smd.EGameMode = EnumGameMode.BlidingAgree;
     }
 
     public void UIMAgreeUICansel()
     {
         _agreeUI.SetActive(false);
+        _obstacle.SetActive(false);
+        _uiSelectGurid.SetActive(true);
 
-        _buildingListUI.SetActive(true);
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelectGurid;
+    }
+
+
+    
+    public void UIMAgreeUIAgree()
+    {
+        _agreeUI.SetActive(false);
+        _obstacle.SetActive(false);
+        _uiSelectGurid.SetActive(true);
+
+
+        GameManager1.Instance.BuildingAgree();
+        
+        SMangerData.Instance.EGameMode = EnumGameMode.BlidingSelectGurid;
 
     }
-    
     
 }

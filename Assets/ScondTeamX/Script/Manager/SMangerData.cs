@@ -178,7 +178,9 @@ public class SMangerData : Singleton<SMangerData>
 public enum EnumGameMode
 {
     Normal,
-    Bliding,
+    BlidingSelect,
+    BlidingSelectGurid,
+    BlidingAgree,
     War,
     Puse
 }
