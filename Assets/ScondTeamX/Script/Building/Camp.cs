@@ -35,9 +35,9 @@ public class Camp : Building
     [Tooltip("ソルジャーコントローラー")]
     SoldierController _solcon;
 
-    /// <summary></summary>
     bool work = false;
 
+    bool gowork = false;
     void Awake()
     {
         _workerControllerObject = GameObject.Find("Worker");
@@ -76,6 +76,7 @@ public class Camp : Building
             StartCoroutine("BuildTimer");
             _workerController.ChangeState(WorkerController.WorkerState.Move);
             _workerController.SetDestination(_thisCampPosition);
+            gowork = true;
         }
     }
 
@@ -150,10 +151,11 @@ public class Camp : Building
             collision.gameObject.tag = "Finish";
         }
 
-        if(collision.gameObject.name == "Worker" && construction == true)
+        if(collision.gameObject.tag == "Worker" && construction == true && gowork == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Working);
             work = true;
+            Debug.Log("Stop");
         }
     }
 
@@ -175,9 +177,12 @@ public class Camp : Building
             mainCamp = true;
             Debug.Log("CampSet");
         }
-        if(work == true)
+        if(work == true && gowork == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Idle);
+            work = false;
+            gowork = false;
+            Debug.Log("Idle");
         }
     }
 

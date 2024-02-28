@@ -27,6 +27,8 @@ public class SoldierMaker : Building
 
     bool work = false;
 
+    bool gowork = false;
+
     private void Awake()
     {
         thisPosition = this.transform.position;
@@ -48,6 +50,15 @@ public class SoldierMaker : Building
             StartCoroutine("BuildTimer");
             _workerController.ChangeState(WorkerController.WorkerState.Move);
             _workerController.SetDestination(thisPosition);
+            gowork = true;
+        }
+
+        if (work == true && construction == false)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Idle);
+            work = false;
+            gowork = false;
+            Debug.Log("finishWork");
         }
     }
     /// <summary>押されたらEffectを起動</summary>
@@ -59,13 +70,12 @@ public class SoldierMaker : Building
 
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Worker" && construction == true)
+        if (collision.gameObject.tag == "Worker" && construction == true && gowork == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Working);
             work = true;
             Debug.Log("good");
         }
-        Debug.Log("but");
     }
 
     /// <summary>Goldが100円以上持っていたら100円払って兵士を生成</summary>
@@ -101,10 +111,6 @@ public class SoldierMaker : Building
             {
                 Debug.Log("soldierがnullです");
             }
-        }
-        if (work == true)
-        {
-            _workerController.ChangeState(WorkerController.WorkerState.Idle);
         }
     }
 }

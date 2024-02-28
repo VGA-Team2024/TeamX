@@ -30,6 +30,8 @@ public class Mine : Building
 
     bool work = false;
 
+    bool gowork = false;
+
     void Awake()
     {
         thisPos = this.transform.position;
@@ -50,6 +52,15 @@ public class Mine : Building
             StartCoroutine("BuildTimer");
             _workerController.ChangeState(WorkerController.WorkerState.Move);
             _workerController.SetDestination(thisPos);
+            gowork = true;
+        }
+
+        if (work == true && construction == false)
+        {
+            _workerController.ChangeState(WorkerController.WorkerState.Idle);
+            work = false;
+            gowork = false;
+            Debug.Log("finishWork");
         }
     }
 
@@ -68,19 +79,16 @@ public class Mine : Building
 
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Worker" && construction == true)
+        if (collision.gameObject.name == "Worker" && construction == true && gowork == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Working);
             work = true;
+            Debug.Log("Working");
         }
     }
     public override void Effect()
     {
         StartCoroutine(AddGold());
-        if (work == true)
-        {
-            _workerController.ChangeState(WorkerController.WorkerState.Idle);
-        }
     }
 
     /// <summary>1秒に1Gold生成する処理</summary>
