@@ -236,6 +236,7 @@ public enum EnumGameMode
     Puse
 }
 
+[Serializable]
 public struct BildDatas
 {
     public List<BildData> bilddatalist;
