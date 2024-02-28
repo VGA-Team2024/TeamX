@@ -109,7 +109,7 @@ MonoBehaviour:
   _buildTime: 300
   construction: 1
   _maxSoldierCountGameObject: {fileID: 0}
-  soldier: {fileID: 8394326415814915033, guid: a6faecc27ed24c045b4c68d8b8b60a93, type: 3}
+  soldier: {fileID: 8394326415814915033, guid: c62ee6037bbe29342be9a94a5dccacf7, type: 3}
   _DataManagerObject: {fileID: 0}
   _workerControllerObject: {fileID: 0}
 --- !u!114 &8015681586447697887

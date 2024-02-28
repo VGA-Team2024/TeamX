@@ -70,7 +70,7 @@ public class SoldierMaker : Building
 
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Worker" && construction == true && gowork == true)
+        if (collision.gameObject.name == "Worker" && construction == true && gowork == true)
         {
             _workerController.ChangeState(WorkerController.WorkerState.Working);
             work = true;
@@ -87,7 +87,7 @@ public class SoldierMaker : Building
             { 
                 if (_dataManager.Gold >= 100)
                 {
-                    if(_dataManager.WarPower <= _maxSoldierCount._maxSoldierCount)
+                    if(_dataManager.WarPower < _maxSoldierCount._maxSoldierCount)
                     {
                         _dataManager.Gold -= 100;
                         GameObject _soldier = Instantiate(soldier, thisPosition, Quaternion.identity);
