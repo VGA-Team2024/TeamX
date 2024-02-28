@@ -26,6 +26,10 @@ public class Mine : Building
     GameObject _workerControllerObject = null;
     WorkerController _workerController;
 
+    [SerializeField, Tooltip("MaxSoldierCount")]
+    GameObject _maxSoldierCountObject = null;
+    MaxSoldierCount _maxSoldierCount;
+
     Vector3 thisPos;
 
     bool work = false;
@@ -37,12 +41,18 @@ public class Mine : Building
         thisPos = this.transform.position;
         _workerControllerObject = GameObject.Find("Worker");
         _workerController = _workerControllerObject.GetComponent<WorkerController>();
+        _maxSoldierCountObject = GameObject.Find("MaxSoldierCount");
+        _maxSoldierCount = _maxSoldierCountObject.GetComponent<MaxSoldierCount>();
     }
 
     void Start()
     {
         _DataManagerObject = GameObject.Find("SManagerData");
         _DataManager = _DataManagerObject.GetComponent<SMangerData>();
+        if(construction == false)
+        {
+            Effect();
+        }
     }
 
     void Update()
@@ -62,18 +72,27 @@ public class Mine : Building
             gowork = false;
             Debug.Log("finishWork");
         }
+
+        if(_maxSoldierCount.goldZero == true)
+        {
+            savingGold = 0;
+            _maxSoldierCount.goldZero = false;
+        }
     }
 
     /// <summary>Objectが押されたら貯まった金を回収</summary>
     public void OnClick()
     {
-        _DataManager.Gold += savingGold;
-        savingGold = 0;
-        Debug.Log("Goldを回収しました");
-        if (maxGold)
+        if(construction == false)
         {
-            Effect();
-            maxGold = false;
+            _DataManager.Gold += savingGold;
+            savingGold = 0;
+            Debug.Log("Goldを回収しました");
+            if (maxGold)
+            {
+                Effect();
+                maxGold = false;
+            }
         }
     }
 
