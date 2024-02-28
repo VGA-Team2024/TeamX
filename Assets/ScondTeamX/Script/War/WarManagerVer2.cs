@@ -11,7 +11,7 @@ public class WarManagerVer2 : MonoBehaviour
     [SerializeField, Tooltip("現在の敵兵力")] int _enemyPower = 1;
     [SerializeField, Tooltip("自動で戦争が始まる間隔(秒)")] float _warInterval = 21600f;
     /// <summary>兵力のテキスト </summary>
-    TMP_Text _enemyWarPowerText;
+    [SerializeField] TextMeshProUGUI _enemyWarPowerText;
     /// <summary>データマネージャー </summary>
     SMangerData _sMangerData;
     /// <summary>プレイヤーの兵力 </summary>
@@ -35,7 +35,6 @@ public class WarManagerVer2 : MonoBehaviour
         UpdateText();
 
         
-        _enemyWarPowerText.text = "Next:兵力" + _enemyPower;
         _timer = 0;
 
     }
@@ -97,5 +96,7 @@ public class WarManagerVer2 : MonoBehaviour
     void UpdateText()
     {
         t_enemyWarPowerObj.SetText(_enemyPower.ToString());
+        _enemyWarPowerText.SetText("Next:兵力" + _enemyPower); 
+
     }
 }
