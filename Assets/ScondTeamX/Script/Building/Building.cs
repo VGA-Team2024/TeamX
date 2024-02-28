@@ -9,8 +9,9 @@ public abstract class Building : MonoBehaviour
 
     public Texture _buildingTexture;
 
+    public int X, Z;
 
-
+    public int DataNumber;
     
     [SerializeField, Tooltip("建築物数")] protected  int _buildnum = 0;
     [SerializeField, Tooltip("建築物最大数")] protected int _buildnumMax = 5;

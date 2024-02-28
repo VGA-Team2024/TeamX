@@ -5,6 +5,7 @@ public class GameManager1 : MonoBehaviour
     public static GameManager1 Instance;
     SMangerData _smd;
 
+
     protected void Awake()
     {
         if (Instance == null)
@@ -61,12 +62,24 @@ public class GameManager1 : MonoBehaviour
         
         _smd.SelectBuildingPrefub.GetComponent<Building>().Buildnum++;
             
-        Instantiate(_smd.SelectBuildingPrefub,
+        var newB =Instantiate(_smd.SelectBuildingPrefub,
             new Vector3(_smd.Lastgurid.X * _smd.FieldToFieldRenge, _smd.FieldBildHight,
                 _smd.Lastgurid.Z * _smd.FieldToFieldRenge)
             , _smd.Fieldquaternion);
 
+        
+        BildData buildData ;
+
+        buildData.X =  _smd.Lastgurid.X;
+        buildData.Z =  _smd.Lastgurid.Z;
+        buildData.Buildnum = _smd._buildNumber;
+        var ad = _smd.BuildData;
+        ad.bilddatalist.Add(buildData);
+        _smd.BuildData = ad;
+
         _smd.Lastgurid.HasBuilding = true;
+        
+        newB.GetComponent<Building>().DataNumber = _smd.BuildData.bilddatalist.Count;
 
         _smd.Gold -= _smd.SelectBuildingPrefub.GetComponent<Building>().BuildPrice;
     }
