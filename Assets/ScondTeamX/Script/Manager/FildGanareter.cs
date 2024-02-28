@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FildGanareter : MonoBehaviour
@@ -9,6 +10,7 @@ public class FildGanareter : MonoBehaviour
     {
         _smd = SMangerData.Instance;
         GuridGararete();
+        BuildGanarater();
     }
 
     public void GuridGararete()
@@ -28,4 +30,26 @@ public class FildGanareter : MonoBehaviour
             }
         }
     }
+
+    public void BuildGanarater()
+    {
+        int a = 0;
+        foreach (var b in _smd.BuildData.bilddatalist)
+        {
+            var nbuild = Instantiate(_smd.BildingPrefubs[b.Buildnum]
+                , new Vector3(b.X * _smd.FieldToFieldRenge, _smd.FieldBildHight, b.Z * _smd.FieldToFieldRenge), _smd.Fieldquaternion);
+
+            var g = _smd.Gurids.Where(e => e.X == b.X && e.Z == b.Z).ToArray();
+
+            g[0].HasBuilding = true;
+            
+            var nb = nbuild.GetComponent<Building>();
+
+            nb.DataNumber = a;
+            
+            a++;
+        }
+    }
+    
+    
 }

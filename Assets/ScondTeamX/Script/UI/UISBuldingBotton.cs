@@ -37,12 +37,11 @@ public class UISBuldingBotton : MonoBehaviour
     {
         set { _tmpPrice.SetText(value); }
     }
-    
-
     public void OnbottonClick()
     {
         SMangerData.Instance.SelectBuildingPrefub = SMangerData.Instance.BildingPrefubs[_structNum];
         SMangerData.Instance.BildDemo = SMangerData.Instance.BildingPrefubs[_structNum];
+        SMangerData.Instance._buildNumber = _structNum;
         UIManager.Instance.UIMSelectBuildBuilding();
     }
 }
